@@ -1,4 +1,4 @@
-/// Your dataset: pairs of [x, y] values
+/// Your dataset: pairs of [x, y] values(temporay untill we got the database up and running)
 const dataset = [
     [5, 20],
     [480, 90],
