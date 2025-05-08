@@ -2,9 +2,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-      "createDb":"node db/createDb.js",
-      "dev": "nodemon backend/server.js"
-  },
+  "createDb": "node db/createDb.js",
+  "dev": "nodemon backend/server.js"
+},
   "dependencies": {
       "express": "4.21.2",
       "nodemon": "3.1.9",
