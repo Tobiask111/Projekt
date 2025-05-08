@@ -1,6 +1,5 @@
 import pg from 'pg';
 import dotenv from 'dotenv';
-import { upload } from './upload.js';
 
 
 dotenv.config();
@@ -139,63 +138,63 @@ INDHOLD integer
 
 await upload(
     db,
-    'db/Eksport_Kaffe.csv',
+    'Data/Eksport_Kaffe.csv',
     'copy Eksport_Kaffe (sitc, land, indud, tid, indhold) from stdin with csv header'
 );
 
 await upload(
     db,
-    'db/Eksport_Levende_dyr.csv',
+    'Data/Eksport_Levende_dyr.csv',
     'copy Eksport_Levende_dyr (sitc, land, indud, tid, indhold) from stdin with csv header'
 
 );
 
 await upload(
     db,
-    'db/Eksport_Maskiner.csv',
+    'Data/Eksport_Maskiner.csv',
     'copy Eksport_Maskiner (sitc, land, indud, tid, indhold) from stdin with csv header'
 );
 
 await upload(
     db,
-    'db/Eksport_Medicin.csv',
+    'Data/Eksport_Medicin.csv',
     'copy Eksport_Medicin (sitc, land, indud, tid, indhold) from stdin with csv header'
 );
 
 await upload(
     db,
-    'db/Eksport_Kaffe.csv',
+    'Data/Eksport_Kaffe.csv',
     'copy Eksport_Kaffe (sitc, land, indud, tid, indhold) from stdin with csv header'
 );
 
 
 await upload(
-    Data,
+    db,
     'Data/Import_Kaffe.csv',
     'copy Import_Kaffe (SITC, Land, INDUD, TID, INDHOLD) from stdin with csv header'
 );
 
 await upload(
-    Data,
-    'Data/Import_Levende Dyr.csv',
-    'copy Import_Levende Dyr (SITC, Land, INDUD, TID, INDHOLD) from stdin with csv'
+    db,
+    'Data/Import_Levende_dyr.csv',
+    'copy Import_Levende_dyr (SITC, Land, INDUD, TID, INDHOLD) from stdin with csv'
 
 );
 
 await upload(
-    Data,
+    db,
     'Data/Import_Maskiner.csv',
     'copy Import_Maskiner (SITC, Land, INDUD, TID, INDHOLD) from stdin with csv'
 );
 
 await upload(
-    Data,
+    db,
     'Data/Import_Medicin.csv',
     'copy Import_Medicin (SITC, Land, INDUD, TID, INDHOLD) from stdin with csv header'
 );
 
 await upload(
-    Data,
+    db,
     'Data/Import_Tobaksvarer.csv',
     'copy Import_Tobaksvarer (SITC, Land, INDUD, TID, INDHOLD) from stdin with csv header'
 

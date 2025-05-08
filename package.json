@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "createDb": "node db/createDb.js"
+    "createDb": "node backend/db/createDb.js"
   },
   "repository": {
     "type": "git",
@@ -17,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/Tobiask111/Projekt/issues"
   },
-  "homepage": "https://github.com/Tobiask111/Projekt#readme"
+  "homepage": "https://github.com/Tobiask111/Projekt#readme",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "pg": "^8.15.6"
+  }
 }
