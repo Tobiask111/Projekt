@@ -3,9 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <title>Danmarks import og eksport</title>
+    <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <div id="barChart"></div>
+
+    <p>Tryk på knappen for at sortere</p>
+    <div>
+      <button id="sortByValue">Efter højeste måleresultat</button>
+      <button id="sortByDate">Efter dato</button>
+      <button id="sortByMeasureTime">Efter hurtigste måletid</button>
+    </div>
+    <br />
+    
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
     <script src="d3.js"></script>
     <script src="snask.js"></script>
