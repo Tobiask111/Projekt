@@ -1,0 +1,21 @@
+{
+  "name": "projekt",
+  "version": "1.0.0",
+  "description": "Gruppe 5s super seje hjemmeside med data",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "createDb": "node db/createDb.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tobiask111/Projekt.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tobiask111/Projekt/issues"
+  },
+  "homepage": "https://github.com/Tobiask111/Projekt#readme"
+}
