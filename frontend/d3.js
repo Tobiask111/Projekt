@@ -8,19 +8,16 @@ const padding = 10;
 // Extra space around the edges for axis labels
 const axisPadding = 70;
 
-//Temporay dataset
-const dataset = [
-  [0.987654, 27, "2023-10-30 08:22:14"],
-  [0.456789, 15, "2023-10-30 09:45:22"],
-  [0.654321, 31, "2023-10-30 10:11:05"],
-  [0.888888, 63, "2023-10-30 12:05:10"],
-  [0.754123, 42, "2023-10-30 14:30:00"],
-  [0.182739, 87, "2023-10-30 15:15:30"],
-  [0.111111, 66, "2023-10-30 16:59:03"],
-  [0.56789, 74, "2023-10-30 18:10:45"],
-  [0.123456, 99, "2023-10-30 20:40:55"],
-  [0.333333, 53, "2023-10-30 22:55:30"],
-];
+//Fetches dat from the database and inserts it into barchart
+let dataset = [];
+fetch("/data")
+  .then(response => response.json())
+  .then(data => {
+    dataset = data.map(d => [//inputs her
+    ]);
+    init(dataset, false);
+  })
+  .catch(error => console.error("Fejl ved hentning af data:", error));
 
 // Append an SVG element to the body of the HTML page
 const svg = d3.select("body").append("svg").attr("width", w).attr("height", h);
