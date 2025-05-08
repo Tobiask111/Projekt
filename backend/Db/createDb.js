@@ -1,5 +1,6 @@
 import pg from 'pg';
 import dotenv from 'dotenv';
+import { upload } from './upload.js';
 
 
 dotenv.config();
