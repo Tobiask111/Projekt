@@ -20,8 +20,8 @@ console.log('Database connection established on', dbResult.rows[0].now);
 
 console.log('Recreating tables...');
 await db.query(`
-drop table if exists albums;
-create table albums (
+drop table if exists Import Kaffe;
+create table Import Kaffe  (
 album_id integer,
 artist_id integer,
 release_date date,
