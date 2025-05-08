@@ -1,0 +1,13 @@
+{
+  "name": "projekt",
+  "version": "1.0.0",
+  "description": "Gruppe 5s super seje hjemmeside med data",
+  "main": "index.js",
+  "scripts": {
+    "createDb": "node backend/db/createDb.js"
+  },
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "pg": "^8.7.1"
+  }
+}

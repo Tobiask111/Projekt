@@ -1,8 +1,6 @@
 import pg from 'pg';
 import dotenv from 'dotenv';
 
-import { upload } from 'pg-upload';
-
 
 dotenv.config();
 console.log('Connecting to database', process.env.PG_DATABASE);
@@ -41,7 +39,7 @@ indhold integer
 )`
 );
 
-console.log('Recreating table Export_Maskiner');
+console.log('Recreating table Eksport_Maskiner');
 await db.query(`
 drop table if exists Eksport_Maskiner;    
 create table Eksport_Maskiner(
@@ -53,7 +51,7 @@ indhold integer
 )`
 );
 
-console.log('Recreating table Export_Medicin');
+console.log('Recreating table Eksport_Medicin');
 await db.query(`
 drop table if exists Eksport_Medicin;    
 create table Eksport_Medicin(
@@ -65,10 +63,10 @@ indhold integer
 )`
 );
 
-console.log('Recreating table Export_Tobak');
+console.log('Recreating table Eksport_Tobak');
 await db.query(`
-drop table if exists Export_Tobak;    
-create table Export_Tobak(
+drop table if exists Eksport_Tobak;    
+create table Eksport_Tobak(
 sitc text,
 land text,
 indud text,
@@ -77,7 +75,7 @@ indhold integer
 )`
 );
 
-console.log('Recreating tables...');
+console.log('Recreating tables Import_Kaffe');
 await db.query(`
 drop table if exists Import_Kaffe;
 create table Import_Kaffe (
@@ -89,7 +87,7 @@ INDHOLD integer
 )`
 );
 
-console.log('Recreating tables...');
+console.log('Recreating tables Import_Levende_Dyr');
 await db.query(`
 drop table if exists Import_Levende_Dyr;
 create table Import_Levende_Dyr(
@@ -101,7 +99,7 @@ INDHOLD integer
 )`
 );
 
-console.log('Recreating tables...');
+console.log('Recreating tables Import_Maskiner');
 await db.query(`
 drop table if exists Import_Maskiner;    
 create table Import_Maskiner(
@@ -113,7 +111,7 @@ INDHOLD integer
 )`
 );
 
-console.log('Recreating tables...');
+console.log('Recreating tables Import_Medicin');
 await db.query(`
 drop table if exists Import_Medicin;
 create table Import_Medicin(
@@ -125,7 +123,7 @@ INDHOLD integer
 )`
 );
 
-console.log('Recreating tables...');
+console.log('Recreating tables Import_Tobaksvarer');
 await db.query(`
 drop table if exists Import_Tobaksvarer;
 create table Import_Tobaksvarer (
@@ -160,7 +158,7 @@ await upload(
 await upload(
     db,
     'db/Eksport_Medicin.csv',
-    'copy Export_Medicin (sitc, land, indud, tid, indhold) from stdin with csv header'
+    'copy Eksport_Medicin (sitc, land, indud, tid, indhold) from stdin with csv header'
 );
 
 await upload(
