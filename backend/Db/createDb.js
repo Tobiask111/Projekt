@@ -20,12 +20,11 @@ console.log('Database connection established on', dbResult.rows[0].now);
 
 console.log('Recreating tables...');
 await db.query(`
-drop table if exists Import Kaffe;
-create table Import Kaffe (
-Import Kaffe_id integer,
+drop table if exists Import_Kaffe;
+create table Import_Kaffe (
 SITC text,
 Land text,
-INDUD varchar(20),
+INDUD text,
 TID integer,
 INDHOLD integer
 )`
@@ -33,12 +32,11 @@ INDHOLD integer
 
 console.log('Recreating tables...');
 await db.query(`
-drop table if exists Import Levende Dyr;
-create table Import Levende Dyr(
-Import Levende Dyr_id integer,
+drop table if exists Import_Levende_Dyr;
+create table Import_Levende_Dyr(
 SITC text,
 Land text,
-INDUD varchar(20),
+INDUD text,
 TID integer,
 INDHOLD integer
 )`
@@ -46,12 +44,11 @@ INDHOLD integer
 
 console.log('Recreating tables...');
 await db.query(`
-drop table if exists Import Maskiner;    
-create table Import Maskiner(
-Import Maskiner_id integer,
+drop table if exists Import_Maskiner;    
+create table Import_Maskiner(
 SITC text,
 Land text,
-INDUD varchar(20),
+INDUD text,
 TID integer,
 INDHOLD integer
 )`
@@ -59,12 +56,11 @@ INDHOLD integer
 
 console.log('Recreating tables...');
 await db.query(`
-drop table if exists Import Medicin;
-create table Import Medicin(
-Import Medicin_id integer,
+drop table if exists Import_Medicin;
+create table Import_Medicin(
 SITC text,
 Land text,
-INDUD varchar(20),
+INDUD text,
 TID integer,
 INDHOLD integer
 )`
@@ -72,12 +68,11 @@ INDHOLD integer
 
 console.log('Recreating tables...');
 await db.query(`
-drop table if exists Import Tobaksvarer;
-create table Import Tobaksvarer (
-Import Tobaksvarer_id integer,
+drop table if exists Import_Tobaksvarer;
+create table Import_Tobaksvarer (
 SITC text,
 Land text,
-INDUD varchar(20),
+INDUD text,
 TID integer,
 INDHOLD integer
 )`
@@ -86,31 +81,31 @@ INDHOLD integer
 
 await upload(
     Data,
-    'Data/Import Kaffe.csv',
-    'copy Import Kaffe (Import Kaffe_id, SITC, Land, INDUD, TID, INDHOLD) from stdin with csv header'
+    'Data/Import_Kaffe.csv',
+    'copy Import_Kaffe (SITC, Land, INDUD, TID, INDHOLD) from stdin with csv header'
 );
 
 await upload(
     Data,
-    'Data/Import Levende Dyr.csv',
-    'copy Import Levende Dyr (Import Levende Dyr_id, SITC, Land, INDUD, TID, INDHOLD) from stdin with csv'
-    
+    'Data/Import_Levende Dyr.csv',
+    'copy Import_Levende Dyr (SITC, Land, INDUD, TID, INDHOLD) from stdin with csv'
+
 );
 
 await upload(
     Data,
-    'Data/Import Maskiner.csv',
-    'copy Import Maskiner (Import Maskiner_id, SITC, Land, INDUD, TID, INDHOLD) from stdin with csv'
+    'Data/Import_Maskiner.csv',
+    'copy Import_Maskiner (SITC, Land, INDUD, TID, INDHOLD) from stdin with csv'
 );
 
 await upload(
     Data,
-    'Data/Import Medicin.csv',
-    'copy Import Medicin (Import Medicin_id, SITC, Land, INDUD, TID, INDHOLD) from stdin with csv header'
+    'Data/Import_Medicin.csv',
+    'copy Import_Medicin (SITC, Land, INDUD, TID, INDHOLD) from stdin with csv header'
 );
 
 await upload(
     Data,
-    'Data/Import Tobaksvarer.csv',
-    'copy Import Tobaksvarer (Import Tobaksvarer_id, SITC, Land, INDUD, TID, INDHOLD) from stdin with csv header'
+    'Data/Import_Tobaksvarer.csv',
+    'copy Import_Tobaksvarer (SITC, Land, INDUD, TID, INDHOLD) from stdin with csv header'
 );
