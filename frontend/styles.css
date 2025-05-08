@@ -1,0 +1,33 @@
+body{
+    background-color:hsl(60, 55%, 90%);
+}
+
+#sortByValue {
+    background-color: rgb(3, 180, 3);
+    color: black;
+    cursor: pointer;
+}
+
+#sortByValue:hover {
+    background-color: darkgreen;
+}
+
+#sortByDate {
+    background-color: rgb(3, 180, 3);
+    color: black;
+    cursor: pointer;
+}
+
+#sortByDate:hover {
+    background-color: darkgreen;
+}
+
+#sortByMeasureTime {
+    background-color: rgb(3, 180, 3);
+    color: black;
+    cursor: pointer;
+}
+
+#sortByMeasureTime:hover {
+    background-color: darkgreen;
+}
