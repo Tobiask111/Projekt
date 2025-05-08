@@ -81,11 +81,11 @@ console.log('Recreating tables...');
 await db.query(`
 drop table if exists Import_Kaffe;
 create table Import_Kaffe (
-SITC text,
-Land text,
-INDUD text,
-TID integer,
-INDHOLD integer
+sitc text,
+land text,
+indud text,
+tid integer,
+indhold integer
 )`
 );
 
@@ -93,11 +93,11 @@ console.log('Recreating tables...');
 await db.query(`
 drop table if exists Import_Levende_Dyr;
 create table Import_Levende_Dyr(
-SITC text,
-Land text,
-INDUD text,
-TID integer,
-INDHOLD integer
+sitc text,
+land text,
+indud text,
+tid integer,
+indhold integer
 )`
 );
 
@@ -105,11 +105,11 @@ console.log('Recreating tables...');
 await db.query(`
 drop table if exists Import_Maskiner;    
 create table Import_Maskiner(
-SITC text,
-Land text,
-INDUD text,
-TID integer,
-INDHOLD integer
+sitc text,
+land text,
+indud text,
+tid integer,
+indhold integer
 )`
 );
 
@@ -117,11 +117,11 @@ console.log('Recreating tables...');
 await db.query(`
 drop table if exists Import_Medicin;
 create table Import_Medicin(
-SITC text,
-Land text,
-INDUD text,
-TID integer,
-INDHOLD integer
+sitc text,
+land text,
+indud text,
+tid integer,
+indhold integer
 )`
 );
 
@@ -129,11 +129,11 @@ console.log('Recreating tables...');
 await db.query(`
 drop table if exists Import_Tobaksvarer;
 create table Import_Tobaksvarer (
-SITC text,
-Land text,
-INDUD text,
-TID integer,
-INDHOLD integer
+sitc text,
+land text,
+indud text,
+tid integer,
+indhold integer
 )`
 );
 
