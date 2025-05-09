@@ -138,7 +138,7 @@ INDHOLD integer
 
 await upload(
     db,
-    'Data/Eksport_Kaffe.csv',
+    'db/Data/Eksport_Kaffe.csv',
     'copy Eksport_Kaffe (sitc, land, indud, tid, indhold) from stdin with csv header'
 );
 
