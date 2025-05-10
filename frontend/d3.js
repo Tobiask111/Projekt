@@ -23,7 +23,7 @@ const dataset = [
 ];
 
 // Append an SVG element to the body of the HTML page
-const svg = d3.select("body").append("svg").attr("width", w).attr("height", h);
+const barSvg = d3.select("#barChartSVG");
 
 // Variables for scales and axes
 let yScale = null;
@@ -67,7 +67,7 @@ function setUp(dataset, isFastest) {
 
 // Draws the initial bar chart
 function createDefaultChart(dataset) {
-  svg
+  barSvg
     .selectAll("rect")
     .data(dataset, function (d) {
       return d[2]; // Use the timestamp as an unique key
@@ -127,13 +127,13 @@ function createAxisX(xScale, isFastest) {
 // Add axes to the SVG
 function addAxes() {
   // X-axis group at the bottom
-  svg
+  barSvg
     .append("g")
     .attr("transform", "translate(0," + (h - padding - axisPadding) + ")")
     .attr("id", "xAxis");
 
   // Y-axis group on the left
-  svg
+  barSvg
     .append("g")
     .attr("transform", "translate(" + (padding + axisPadding) + ",0)")
     .attr("id", "yAxis")
@@ -144,7 +144,7 @@ function addAxes() {
 
 // Format X-axis labels (rotate and align)
 function formatAxisX() {
-  svg
+  barSvg
     .select("#xAxis")
     .call(xAxis) // Apply updated X-axis
     .call(xAxis.tickSize(0)) // Remove tick lines
@@ -158,7 +158,7 @@ function animateData(data, isFastest) {
   setUp(data, isFastest); 
     formatAxisX(); // Reapply axis labels
 
-  svg
+  barSvg
     .selectAll("rect")
     .data(data, function (d) {
       return d[2]; // Match bars by timestamp
@@ -183,3 +183,6 @@ function sortData(by) {
     dataset.sort((a, b) => a[0] - b[0]);
   }
 }
+//------------------------------------------------------
+
+

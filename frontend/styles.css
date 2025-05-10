@@ -1,4 +1,13 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body{
+    min-width: 1200px;
+    min-height: 1200px;
     background-color:hsl(60, 55%, 90%);
 }
 
@@ -31,3 +40,4 @@ body{
 #sortByMeasureTime:hover {
     background-color: darkgreen;
 }
+
