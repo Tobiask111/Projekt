@@ -147,7 +147,7 @@ await db.query(`
 
 await db.query(`
     drop table if exists Vigtiste_Handelspartnere;
-    create table Vigtiste_Handelspartnere (
+    create table Vigtigste_Handelspartnere (
     post text,
     enhed text,
     sæson text,
@@ -231,8 +231,8 @@ await upload(
 
 await upload(
     db,
-    'db/data/Vigtiste_Handelspartnere.csv',
-    `copy Vigtiste_Handelspartnere (post, enhed, sæson, tid, land, indud, indhold) from stdin with csv header delimiter ';'`
+    'db/data/Vigtigste_Handelspartnere.csv',
+    `copy Vigtigste_Handelspartnere (post, enhed, sæson, tid, land, indud, indhold) from stdin with csv header delimiter ';'`
 );
 
 console.log('Database and data ready');
