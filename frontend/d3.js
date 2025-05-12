@@ -9,7 +9,7 @@ const padding = 10;
 const axisPadding = 70;
 
 //Temporay dataset
-const dataset = [
+let dataset = [
   [0.987654, 27, "2023-10-30 08:22:14"],
   [0.456789, 15, "2023-10-30 09:45:22"],
   [0.654321, 31, "2023-10-30 10:11:05"],
@@ -21,6 +21,14 @@ const dataset = [
   [0.123456, 99, "2023-10-30 20:40:55"],
   [0.333333, 53, "2023-10-30 22:55:30"],
 ];
+
+function loadVigtigisteHandelspartnere(){
+  fetch("/api/vigtig_handelpartnere").then(response => response.json()).then(data => {
+    dataset=data;
+    init(dataset, false) 
+  }) 
+}
+loadVigtigisteHandelspartnere()
 
 // Append an SVG element to the body of the HTML page
 const svg = d3.select("body").append("svg").attr("width", w).attr("height", h);
