@@ -22,14 +22,8 @@ const port = 3001;
 const server = express();
 server.use(express.static('frontend'));
 server.use(onEachRequest)
-server.get('/api/albums', onGetAlbums);
-server.get('/api/title', onGetTitle);
-server.get('/api/year', onGetYear);
-server.get('/api/artist', onGetArtist);
-server.get('/api/bob', onGetBob);
-server.get('/api/snickers', onGetSnickers);
-server.get('/api/banan', onGetBanan);
-server.get('/api/ligma', onGetLigma)
+server.get('/api/vigtig_handelpartnere', onGetVigtig_handelpartnere);
+
 
 
 server.listen(port, onServerReady);
@@ -41,4 +35,9 @@ function onEachRequest(request, response, next) {
 
 function onServerReady() {
     console.log('Webserver running on port', port);
+}
+
+async function onGetVigtig_handelpartnere(request,response){
+    const dbResult=await db.query("select ENHED,TID,LAND,INDUD,INDHOLD from Vigtigste_handelspartnere");
+    response.json(dbResult.rows)
 }
