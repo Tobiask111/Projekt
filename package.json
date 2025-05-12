@@ -1,25 +1,15 @@
 {
-  "name": "projekt",
-  "version": "1.0.0",
-  "description": "Gruppe 5s super seje hjemmeside med data",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "createDb": "node backend/db/createDb.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Tobiask111/Projekt.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Tobiask111/Projekt/issues"
-  },
-  "homepage": "https://github.com/Tobiask111/Projekt#readme",
-  "dependencies": {
-    "dotenv": "^16.5.0",
-    "pg": "^8.15.6"
-  }
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "createDb": "node backend/db/createDb.js",
+        "dev": "nodemon backend/server.js"
+    },
+    "dependencies": {
+        "dotenv": "16.4.7",
+        "express": "4.21.2",
+        "nodemon": "3.1.9",
+        "pg": "8.13.1",
+        "pg-upload": "0.0.3"
+    }
 }

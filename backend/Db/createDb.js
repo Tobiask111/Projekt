@@ -1,5 +1,6 @@
 import pg from 'pg';
 import dotenv from 'dotenv';
+import { upload } from './upload.js';
 
 
 dotenv.config();
@@ -17,25 +18,26 @@ console.log('Database connection established on', dbResult.rows[0].now);
 
 console.log('Recreating table Eksport_Kaffe');
 await db.query(`
-drop table if exists Eksport_Kaffe;
-create table Eksport_Kaffe (
-sitc text,
-land text,
-indud text,
-tid integer,
-indhold integer
+DROP TABLE IF EXISTS eksport_kaffe;
+CREATE TABLE eksport_kaffe (
+  sitc text,
+  land text,
+  indud text,
+  tid text,
+  indhold text
 )`
 );
 
-console.log('Recreating table Eksport_Levende_Dyr');
+
+console.log('Recreating table Eksport_Levende_dyr');
 await db.query(`
-drop table if exists Eksport_Levende_Dyr;
-create table Eksport_Levende_Dyr(
+drop table if exists Eksport_Levende_dyr;
+create table Eksport_Levende_dyr (
 sitc text,
 land text,
 indud text,
-tid integer,
-indhold integer
+tid text,
+indhold text
 )`
 );
 
@@ -46,8 +48,8 @@ create table Eksport_Maskiner(
 sitc text,
 land text,
 indud text,
-tid integer,
-indhold integer
+tid text,
+indhold text
 )`
 );
 
@@ -58,8 +60,8 @@ create table Eksport_Medicin(
 sitc text,
 land text,
 indud text,
-tid integer,
-indhold integer
+tid text,
+indhold text
 )`
 );
 
@@ -70,8 +72,8 @@ create table Eksport_Tobak(
 sitc text,
 land text,
 indud text,
-tid integer,
-indhold integer
+tid text,
+indhold text
 )`
 );
 
@@ -82,20 +84,20 @@ create table Import_Kaffe (
 SITC text,
 Land text,
 INDUD text,
-TID integer,
-INDHOLD integer
+TID text,
+INDHOLD text
 )`
 );
 
 console.log('Recreating tables Import_Levende_Dyr');
 await db.query(`
-drop table if exists Import_Levende_Dyr;
-create table Import_Levende_Dyr(
+drop table if exists Import_Levende_dyr;
+create table Import_Levende_dyr(
 SITC text,
 Land text,
 INDUD text,
-TID integer,
-INDHOLD integer
+TID text,
+INDHOLD text
 )`
 );
 
@@ -106,8 +108,8 @@ create table Import_Maskiner(
 SITC text,
 Land text,
 INDUD text,
-TID integer,
-INDHOLD integer
+TID text,
+INDHOLD text
 )`
 );
 
@@ -118,8 +120,8 @@ create table Import_Medicin(
 SITC text,
 Land text,
 INDUD text,
-TID integer,
-INDHOLD integer
+TID text,
+INDHOLD text
 )`
 );
 
@@ -130,73 +132,79 @@ create table Import_Tobaksvarer (
 SITC text,
 Land text,
 INDUD text,
-TID integer,
-INDHOLD integer
+TID text,
+INDHOLD text
 )`
 );
 
 
 await upload(
     db,
-    'db/Data/Eksport_Kaffe.csv',
-    'copy Eksport_Kaffe (sitc, land, indud, tid, indhold) from stdin with csv header'
+    'backend/db/Eksport_Kaffe.csv',
+    'copy Eksport_Kaffe (sitc, land, indud, tid, indhold) from stdin with csv header DELIMITER \';\''
 );
 
 await upload(
     db,
-    'Data/Eksport_Levende_dyr.csv',
-    'copy Eksport_Levende_dyr (sitc, land, indud, tid, indhold) from stdin with csv header'
-
-);
-
-await upload(
-    db,
-    'Data/Eksport_Maskiner.csv',
-    'copy Eksport_Maskiner (sitc, land, indud, tid, indhold) from stdin with csv header'
-);
-
-await upload(
-    db,
-    'Data/Eksport_Medicin.csv',
-    'copy Eksport_Medicin (sitc, land, indud, tid, indhold) from stdin with csv header'
-);
-
-await upload(
-    db,
-    'Data/Eksport_Kaffe.csv',
-    'copy Eksport_Kaffe (sitc, land, indud, tid, indhold) from stdin with csv header'
-);
-
-
-await upload(
-    db,
-    'Data/Import_Kaffe.csv',
-    'copy Import_Kaffe (SITC, Land, INDUD, TID, INDHOLD) from stdin with csv header'
-);
-
-await upload(
-    db,
-    'Data/Import_Levende_dyr.csv',
-    'copy Import_Levende_dyr (SITC, Land, INDUD, TID, INDHOLD) from stdin with csv'
+    'backend/Db/Eksport_Levende_dyr.csv',
+    'copy Eksport_Levende_dyr (sitc, land, indud, tid, indhold) from stdin with csv header DELIMITER \';\''
 
 );
 
 await upload(
     db,
-    'Data/Import_Maskiner.csv',
-    'copy Import_Maskiner (SITC, Land, INDUD, TID, INDHOLD) from stdin with csv'
+    'backend/db/Eksport_Maskiner.csv',
+    'copy Eksport_Maskiner (sitc, land, indud, tid, indhold) from stdin with csv header DELIMITER \';\''
 );
 
 await upload(
     db,
-    'Data/Import_Medicin.csv',
-    'copy Import_Medicin (SITC, Land, INDUD, TID, INDHOLD) from stdin with csv header'
+    'backend/db/Eksport_Medicin.csv',
+    'copy Eksport_Medicin (sitc, land, indud, tid, indhold) from stdin with csv header DELIMITER \';\''
 );
 
 await upload(
     db,
-    'Data/Import_Tobaksvarer.csv',
-    'copy Import_Tobaksvarer (SITC, Land, INDUD, TID, INDHOLD) from stdin with csv header'
+    'backend/db/Eksport_Kaffe.csv',
+    'copy Eksport_Kaffe (sitc, land, indud, tid, indhold) from stdin with csv header DELIMITER \';\''
+);
+
+await upload(
+    db,
+    'backend/db/Eksport_tobak.csv',
+    'copy Eksport_tobak (sitc, land, indud, tid, indhold) from stdin with csv header DELIMITER \';\''
+);
+
+
+await upload(
+    db,
+    'backend/db/Import_Kaffe.csv',
+    'copy Import_Kaffe (SITC, Land, INDUD, TID, INDHOLD) from stdin with csv header DELIMITER \';\''
+);
+
+await upload(
+    db,
+    'backend/db/Import_Levende_dyr.csv',
+    'copy Import_Levende_dyr (SITC, Land, INDUD, TID, INDHOLD) from stdin with csv DELIMITER \';\''
+
+);
+
+await upload(
+    db,
+    'backend/db/Import_Maskiner.csv',
+    'copy Import_Maskiner (SITC, Land, INDUD, TID, INDHOLD) from stdin with csv DELIMITER \';\''
+);
+
+await upload(
+    db,
+    'backend/db/Import_Medicin.csv',
+    'copy Import_Medicin (SITC, Land, INDUD, TID, INDHOLD) from stdin with csv header DELIMITER \';\''
+);
+
+await upload(
+    db,
+    'backend/db/Import_Tobaksvarer.csv',
+    'copy Import_Tobaksvarer (SITC, Land, INDUD, TID, INDHOLD) from stdin with csv header DELIMITER \';\''
 
 );
 console.log('Database and data ready');
