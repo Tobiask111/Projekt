@@ -19,6 +19,31 @@ function loadVigtigisteHandelspartnere(){
 }
 loadVigtigisteHandelspartnere()
 
+function loadEksportVImport(){
+  fetch("/api/EksportvImport").then(response => response.json()).then(data => {
+    dataset=data;
+    init(dataset,false) 
+  }) 
+}
+loadEksportVImport()
+
+
+function loadTotalEksport(){
+  fetch("/api/totaleksport").then(response => response.json()).then(data => {
+    dataset=data;
+    init(dataset,false) 
+  }) 
+}
+loadTotalEksport()
+
+function loadTotalImport(){
+  fetch("/api/totalimport").then(response => response.json()).then(data => {
+    dataset=data;
+    init(dataset,false) 
+  }) 
+}
+loadTotalImport()
+
 // Append an SVG element to the body of the HTML page
 const svg = d3.select("body").append("svg").attr("width", w).attr("height", h);
 
