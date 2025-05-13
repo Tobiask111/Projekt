@@ -1,182 +1,233 @@
-// Creates the svgs drawing area
+//Drawing area for the barchart. Also uses padding to create margins inbetween the pillars and the axis.
 const w = 1000;
 const h = 500;
-
-// Padding between bars to avoid overlap
 const padding = 10;
-
-// Extra space around the edges for axis labels
 const axisPadding = 70;
 
-//Temporay dataset
+//We use let here to create an empty array where we can place data in later.
 let dataset = [];
 
-function loadVigtigisteHandelspartnere(){
-  fetch("/api/vigtig_handelpartnere").then(response => response.json()).then(data => {
-    dataset=data;
-    init(dataset,false) 
-  }) 
+//A variable that is needed to showcase the right data in the different pillars.
+let currentMetric = "Total"; 
+
+//A variable that is needed to change the color of the pillars based on their values. 
+let colorScale = null; // We use null because the color sacle is not yet created.
+
+//fetches data function
+function loadVigtigisteHandelspartnere() {
+  fetch("/api/vigtig_handelpartnere") //Gets the data from the server
+    .then(response => response.json()) //converts it into json
+    .then(data => {
+      dataset = processData(data); //the data is sent to be processed
+      dataset.sort((a, b) => b.total - a.total); //sorts the data descending 
+      initialize(dataset); //runs the initialize function
+    })
 }
-loadVigtigisteHandelspartnere()
+//calls the function
+loadVigtigisteHandelspartnere();
 
-// Append an SVG element to the body of the HTML page
-const svg = d3.select("body").append("svg").attr("width", w).attr("height", h);
+// Opret SVG
+const svg = d3.select("body").append("svg")
+  .attr("width", w)
+  .attr("height", h);
 
-// Variables for scales and axes
+// Tooltip
+d3.select("body").append("div")
+  .attr("id", "tooltip")
+  .style("position", "absolute")
+  .style("visibility", "hidden")
+  .style("background", "white")
+  .style("padding", "5px")
+  .style("border", "1px solid black")
+  .style("border-radius", "4px");
+
+// Tekstboks for sortering
+const sortingText = svg.append("text")
+  .attr("x", w / 2)
+  .attr("y", padding + 30)
+  .attr("text-anchor", "middle")
+  .attr("font-size", "16px")
+  .attr("font-weight", "bold")
+  .attr("fill", "black")
+  .text("Sortering: Total");
+
 let yScale = null;
 let xScale = null;
 let xAxis = null;
 let yAxis = null;
 
-// Initialize the chart when the page loads
-init(dataset, false);
+// Behandl data
+function processData(data) {
+  const result = {};
 
-// Add event listeners to sorting buttons
-d3.selectAll("#sortByValue, #sortByDate, #sortByMeasureTime").on("click", function (e) {
-  const id = e.target.id; // Get the ID of the clicked button
-  console.log(id); // Log which button was clicked in the console
+  data.forEach(row => {
+    const { land, indud, indhold } = row;
+    const value = parseFloat(indhold);
+    if (isNaN(value)) return;
 
-  // Check if sorting by measurement time
-  let isFastest = id === "sortByMeasureTime";
+    if (!result[land]) result[land] = { eksport: 0, import: 0 };
 
-  // Sort dataset based on the selected criteria
-  sortData(id);
-  console.log("Sorted data by " + id + " : ", dataset);
+    if (indud === 'Exports') result[land].eksport = value;
+    else if (indud === 'Imports') result[land].import = value;
+  });
 
-  // Animate the chart to reflect the new sorted order
-  animateData(dataset, isFastest);
-});
+  return Object.keys(result).map(land => ({
+    land,
+    eksport: result[land].eksport,
+    import: result[land].import,
+    total: result[land].eksport + result[land].import
+  }));
+}
 
-// Initializes the chart with axes and default data
-function init(dataset, isFastest) {
-  setUp(dataset, isFastest);
+function initialize(dataset) {
+  setUp(dataset);
   createDefaultChart(dataset);
   addAxes();
 }
 
-// Set up the scales and axes
-function setUp(dataset, isFastest) {
+function setUp(dataset) {
   yScale = createScaleY(dataset);
   xScale = createScaleX(dataset);
-  xAxis = createAxisX(xScale, isFastest);
+  xAxis = createAxisX(xScale);
   yAxis = createAxisY(yScale);
+  colorScale = createColorScale(dataset);
 }
 
-// Draws the initial bar chart
+function createScaleX(dataset) {
+  return d3.scaleBand()
+    .range([padding + axisPadding, w - padding - axisPadding])
+    .domain(dataset.map(d => d.land))
+    .padding(0.1);
+}
+
+function createScaleY(dataset) {
+  return d3.scaleLinear()
+    .domain([0, d3.max(dataset, getValueByMetric)])
+    .range([h - padding - axisPadding, padding + axisPadding])
+    .nice();
+}
+
+function createColorScale(dataset) {
+  return d3.scaleLinear()
+    .domain([0, d3.max(dataset, getValueByMetric)])
+    .range(["lightblue", "darkblue"]);
+}
+
+function createAxisY(yScale) {
+  return d3.axisLeft().scale(yScale).ticks(5);
+}
+
+function createAxisX(xScale) {
+  return d3.axisBottom().scale(xScale);
+}
+
+function getValueByMetric(d) {
+  return currentMetric === "eksport" ? d.eksport
+       : currentMetric === "import" ? d.import
+       : d.total;
+}
+
 function createDefaultChart(dataset) {
-  svg
-    .selectAll("rect")
-    .data(dataset, function (d) {
-      return d[2]; // Use the timestamp as an unique key
-    })
+  svg.selectAll("rect")
+    .data(dataset, d => d.land)
     .enter()
     .append("rect")
-    .attr("x", function (d, i) {
-      return xScale(i) + padding; // X-position using scale and padding
+    .attr("x", d => xScale(d.land))
+    .attr("y", d => yScale(getValueByMetric(d)))
+    .attr("width", xScale.bandwidth())
+    .attr("height", d => h - padding - axisPadding - yScale(getValueByMetric(d)))
+    .attr("fill", d => colorScale(getValueByMetric(d)))
+    .on("mouseover", function (event, d) {
+      d3.select("#tooltip")
+        .style("visibility", "visible")
+        .html(`${d.land}: ${getValueByMetric(d).toFixed(1)}`)
+        .style("left", (event.pageX + 5) + "px")
+        .style("top", (event.pageY - 28) + "px");
     })
-    .attr("y", function (d) {
-      return yScale(d[1]); // Y-position depends on value
-    })
-    .attr(
-      "width",
-      w / dataset.length - 2 * padding - (2 * axisPadding) / dataset.length // Width per bar
-    )
-    .attr("height", function (d) {
-      return h - padding - axisPadding - yScale(d[1]); // Height from value
-    })
-    .attr("fill", function (d) {
-      // Color is based on the value (darker for higher values)
-      return "rgb(0, 0, " + (256 - d[1] * 2) + ")";
-    });
+    .on("mouseout", () => d3.select("#tooltip").style("visibility", "hidden"));
 }
 
-// Create the X scale using scaleBand for even spacing
-function createScaleX(dataset) {
-  return d3
-    .scaleBand()
-    .range([padding + axisPadding, w - padding - axisPadding])
-    .domain(dataset.map((d, i) => i)); // Domain is the index of each item
-}
-
-// Create the Y scale using scaleLinear for value range
-function createScaleY(dataset) {
-  return d3
-    .scaleLinear()
-    .domain([0, d3.max(dataset, d => d[1])]) // From 0 to the max value
-    .range([h - padding - axisPadding, padding + axisPadding]) // Inverted so higher values are higher on screen
-    .nice(); // Round values nicely
-}
-
-// Create the left Y-axis
-function createAxisY(yScale) {
-  return d3.axisLeft().scale(yScale).ticks(5); // 5 ticks on the Y-axis
-}
-
-// Create the bottom X-axis with conditional formatting
-function createAxisX(xScale, isFastest) {
-  return d3.axisBottom()
-    .scale(xScale)
-    .tickFormat(function (d) {
-      return isFastest ? dataset[d][0] : dataset[d][2]; // Show time or date depending on the context
-    });
-}
-
-// Add axes to the SVG
 function addAxes() {
-  // X-axis group at the bottom
-  svg
-    .append("g")
-    .attr("transform", "translate(0," + (h - padding - axisPadding) + ")")
-    .attr("id", "xAxis");
-
-  // Y-axis group on the left
-  svg
-    .append("g")
-    .attr("transform", "translate(" + (padding + axisPadding) + ",0)")
-    .attr("id", "yAxis")
-    .call(yAxis); // Attach Y-axis
-
-  formatAxisX(); // Style and rotate X-axis labels
-}
-
-// Format X-axis labels (rotate and align)
-function formatAxisX() {
-  svg
-    .select("#xAxis")
-    .call(xAxis) // Apply updated X-axis
-    .call(xAxis.tickSize(0)) // Remove tick lines
+  svg.append("g")
+    .attr("transform", `translate(0, ${h - padding - axisPadding})`)
+    .attr("id", "xAxis")
+    .call(xAxis)
     .selectAll("text")
-    .attr("transform", "translate(-10,5)rotate(-45)") // Tilt text
-    .style("text-anchor", "end"); // Right-align text
+    .attr("transform", "translate(-10,5)rotate(-45)")
+    .style("text-anchor", "end");
+
+  svg.append("g")
+    .attr("transform", `translate(${padding + axisPadding},0)`)
+    .attr("id", "yAxis")
+    .call(yAxis);
 }
 
-// Animate bars and X-axis when sorting
-function animateData(data, isFastest) {
-  setUp(data, isFastest); 
-    formatAxisX(); // Reapply axis labels
+// Opdater ved sorteringsklik
+d3.selectAll("#sortByExport, #sortByImport, #sortByTotal").on("click", function (e) {
+  const id = e.target.id;
 
-  svg
-    .selectAll("rect")
-    .data(data, function (d) {
-      return d[2]; // Match bars by timestamp
-    })
-    .transition() // Start a transition
-    .duration(2000) // Duration in milliseconds
-    .attr("x", function (d, i) {
-      return xScale(i) + padding; // Move bars to new positions
-    });
-}
-
-// Sort the dataset based on selected criteria
-function sortData(by) {
-  if (by === "sortByValue") {
-    // Sort descending by value
-    dataset.sort((a, b) => b[1] - a[1]);
-  } else if (by === "sortByDate") {
-    // Sort ascending by timestamp
-    dataset.sort((a, b) => new Date(a[2]) - new Date(b[2]));
+  if (id === "sortByExport") {
+    currentMetric = "eksport";
+    dataset.sort((a, b) => b.eksport - a.eksport);
+    sortingText.text("Sortering: Eksport");
+  } else if (id === "sortByImport") {
+    currentMetric = "import";
+    dataset.sort((a, b) => b.import - a.import);
+    sortingText.text("Sortering: Import");
   } else {
-    // Sort ascending by measurement time
-    dataset.sort((a, b) => a[0] - b[0]);
+    currentMetric = "total";
+    dataset.sort((a, b) => b.total - a.total);
+    sortingText.text("Sortering: Total");
   }
+
+  animateData(dataset);
+});
+
+// Animer ved sortering
+function animateData(data) {
+  yScale = createScaleY(data);
+  xScale = createScaleX(data);
+  xAxis = createAxisX(xScale);
+  colorScale = createColorScale(data);
+
+  svg.select("#yAxis").call(yAxis.scale(yScale));
+  svg.select("#xAxis").call(xAxis);
+  formatAxisX();
+
+  const bars = svg.selectAll("rect").data(data, d => d.land);
+
+  bars.transition()
+    .duration(1000)
+    .attr("x", d => xScale(d.land))
+    .attr("y", d => yScale(getValueByMetric(d)))
+    .attr("width", xScale.bandwidth())
+    .attr("height", d => h - padding - axisPadding - yScale(getValueByMetric(d)))
+    .attr("fill", d => colorScale(getValueByMetric(d)));
+
+  bars.on("mouseover", function (event, d) {
+      d3.select("#tooltip")
+        .style("visibility", "visible")
+        .html(`${d.land}: ${getValueByMetric(d).toFixed(1)}`)
+        .style("left", (event.pageX + 5) + "px")
+        .style("top", (event.pageY - 28) + "px");
+    })
+    .on("mouseout", () => d3.select("#tooltip").style("visibility", "hidden"));
+
+  bars.enter().append("rect")
+    .attr("x", d => xScale(d.land))
+    .attr("y", d => yScale(getValueByMetric(d)))
+    .attr("width", xScale.bandwidth())
+    .attr("height", d => h - padding - axisPadding - yScale(getValueByMetric(d)))
+    .attr("fill", d => colorScale(getValueByMetric(d)));
+
+  bars.exit().remove();
+}
+
+function formatAxisX() {
+  svg.select("#xAxis")
+    .call(xAxis)
+    .call(xAxis.tickSize(0))
+    .selectAll("text")
+    .attr("transform", "translate(-10,5)rotate(-45)")
+    .style("text-anchor", "end");
 }
