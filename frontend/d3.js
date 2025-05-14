@@ -19,13 +19,48 @@ function loadVigtigisteHandelspartnere(){
 }
 loadVigtigisteHandelspartnere()
 
-function loadEksportVImport(){
-  fetch("/api/EksportvImport").then(response => response.json()).then(data => {
+function loadonKaffe(){
+  fetch("/api/onKaffe").then(response => response.json()).then(data => {
     dataset=data;
     init(dataset,false) 
   }) 
 }
-loadEksportVImport()
+loadonKaffe()
+
+function loadonMaskiner(){
+  fetch("/api/onMaskiner").then(response => response.json()).then(data => {
+    dataset=data;
+    init(dataset,false) 
+  }) 
+}
+loadonMaskiner()
+
+function loadonLevendeDyr(){
+  fetch("/api/onLevendeDyr").then(response => response.json()).then(data => {
+    dataset=data;
+    init(dataset,false) 
+  }) 
+}
+loadonLevendeDyr()
+
+function loadonMedicin(){
+  fetch("/api/onMedicin").then(response => response.json()).then(data => {
+    dataset=data;
+    init(dataset,false) 
+  }) 
+}
+loadonMedicin()
+
+function loadonTobak(){
+  fetch("/api/onTobak").then(response => response.json()).then(data => {
+    dataset=data;
+    init(dataset,false) 
+  }) 
+}
+loadonTobak()
+
+
+
 
 
 function loadTotalEksport(){

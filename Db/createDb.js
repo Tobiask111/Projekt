@@ -154,7 +154,7 @@ await db.query(`
     tid text,
     land text,
     indud text,
-    indhold text
+    indhold numeric
     )`
 );
 
