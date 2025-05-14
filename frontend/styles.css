@@ -1,33 +1,74 @@
-body{
-    background-color:hsl(60, 55%, 90%);
+body {
+  background-color: hsl(60, 55%, 90%);
 }
 
-#sortByValue {
-    background-color: rgb(3, 180, 3);
-    color: black;
-    cursor: pointer;
+/* Knapper – fælles styling */
+#sortByExport{
+  background-color: rgb(4, 235, 4);
+  color: black;
+  cursor: pointer;
+  border: none;
+  padding: 8px 12px;
+  margin: 5px;
+  font-size: 14px;
+  border-radius: 5px;
 }
 
-#sortByValue:hover {
-    background-color: darkgreen;
+#sortByImport{
+  background-color: rgb(4, 235, 4);
+  color: black;
+  cursor: pointer;
+  border: none;
+  padding: 8px 12px;
+  margin: 5px;
+  font-size: 14px;
+  border-radius: 5px;
 }
 
-#sortByDate {
-    background-color: rgb(3, 180, 3);
-    color: black;
-    cursor: pointer;
+#sortByTotal{
+  background-color: rgb(4, 235, 4);
+  color: black;
+  cursor: pointer;
+  border: none;
+  padding: 8px 12px;
+  margin: 5px;
+  font-size: 14px;
+  border-radius: 5px;
 }
 
-#sortByDate:hover {
-    background-color: darkgreen;
+#sortByExport:hover {
+  background-color: darkgreen;
+  color: white;
 }
 
-#sortByMeasureTime {
-    background-color: rgb(3, 180, 3);
-    color: black;
-    cursor: pointer;
+#sortByImport:hover {
+  background-color: darkgreen;
+  color: white;
 }
 
-#sortByMeasureTime:hover {
-    background-color: darkgreen;
+#sortByTotal:hover {
+  background-color: darkgreen;
+  color: white;
+}
+
+#tekstboksBarchart {
+  position: absolute;
+  visibility: hidden;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 5px 8px;
+  border-radius: 3px;
+  font-size: 14px;
+  z-index: 10;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  opacity: 1; /* Opdateret til 1, hvis du ønsker at bruge opacity for at vise den */
+}
+
+/* Teksten over barchart */
+#textboxImportExportTotal {
+  font-size: 16px;
+  font-weight: bold;
+  fill: black;
+  text-anchor: middle;
 }

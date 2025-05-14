@@ -146,7 +146,7 @@ await db.query(`
 );
 
 await db.query(`
-    drop table if exists Vigtiste_Handelspartnere;
+    drop table if exists Vigtigste_Handelspartnere;
     create table Vigtigste_Handelspartnere (
     post text,
     enhed text,

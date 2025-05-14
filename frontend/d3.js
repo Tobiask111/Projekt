@@ -8,60 +8,61 @@ const axisPadding = 70;
 let dataset = [];
 
 //A variable that is needed to showcase the right data in the different pillars.
-let currentMetric = "Total"; 
+let currentMetric = "Total";
 
 //A variable that is needed to change the color of the pillars based on their values. 
-let colorScale = null; // We use null because the color sacle is not yet created.
+let colorScale = null; // We use null because the color sacle is not yet created
 
-//fetches data function
+// Fetches data
 function loadVigtigisteHandelspartnere() {
   fetch("/api/vigtig_handelpartnere") //Gets the data from the server
     .then(response => response.json()) //converts it into json
     .then(data => {
       dataset = processData(data); //the data is sent to be processed
-      dataset.sort((a, b) => b.total - a.total); //sorts the data descending 
+      dataset.sort((a, b) => b.total - a.total); //sorts the data descending
       initialize(dataset); //runs the initialize function
-    })
+    });
 }
 //calls the function
 loadVigtigisteHandelspartnere();
 
-// Opret SVG
+//adds the atributes width(as w) and height(as h) to it
 const svg = d3.select("body").append("svg")
   .attr("width", w)
   .attr("height", h);
 
-// Tooltip
+//Creates the body and adds a div element with the id "tekstboksBarchart"
 d3.select("body").append("div")
-  .attr("id", "tooltip")
-  .style("position", "absolute")
-  .style("visibility", "hidden")
-  .style("background", "white")
-  .style("padding", "5px")
-  .style("border", "1px solid black")
-  .style("border-radius", "4px");
+  .attr("id", "tekstboksBarchart");
 
-// Tekstboks for sortering
+//Adds a text svg element 
 const sortingText = svg.append("text")
-  .attr("x", w / 2)
-  .attr("y", padding + 30)
-  .attr("text-anchor", "middle")
-  .attr("font-size", "16px")
-  .attr("font-weight", "bold")
-  .attr("fill", "black")
-  .text("Sortering: Total");
 
+//Places the horizontal part of the text in the middle of the svg element 
+  .attr("x", w / 2) 
+
+  //Places the vertical part of the text a little down from the top
+  .attr("y", padding + 30)
+
+  //Adds the text "samlet"
+  .text("Sortering: Samlet");
+
+ // the x and y scale places the data on the x and y axes
+ // we use null because the avlues are created at a later point 
 let yScale = null;
 let xScale = null;
+
+//Creates the axes
 let xAxis = null;
 let yAxis = null;
 
-// Behandl data
+// function "processData" with a data parameter 
 function processData(data) {
-  const result = {};
-
+  const result = {}; //crates an empty object to handle the text
   data.forEach(row => {
-    const { land, indud, indhold } = row;
+    const { land, indud, indhold } = row; //creates a row for each "land, indud(import and export), indhold"
+
+    
     const value = parseFloat(indhold);
     if (isNaN(value)) return;
 
@@ -138,13 +139,13 @@ function createDefaultChart(dataset) {
     .attr("height", d => h - padding - axisPadding - yScale(getValueByMetric(d)))
     .attr("fill", d => colorScale(getValueByMetric(d)))
     .on("mouseover", function (event, d) {
-      d3.select("#tooltip")
+      d3.select("#tekstboksBarchart")
         .style("visibility", "visible")
         .html(`${d.land}: ${getValueByMetric(d).toFixed(1)}`)
         .style("left", (event.pageX + 5) + "px")
         .style("top", (event.pageY - 28) + "px");
     })
-    .on("mouseout", () => d3.select("#tooltip").style("visibility", "hidden"));
+    .on("mouseout", () => d3.select("#tekstboksBarchart").style("visibility", "hidden"));
 }
 
 function addAxes() {
@@ -162,7 +163,6 @@ function addAxes() {
     .call(yAxis);
 }
 
-// Opdater ved sorteringsklik
 d3.selectAll("#sortByExport, #sortByImport, #sortByTotal").on("click", function (e) {
   const id = e.target.id;
 
@@ -177,13 +177,12 @@ d3.selectAll("#sortByExport, #sortByImport, #sortByTotal").on("click", function 
   } else {
     currentMetric = "total";
     dataset.sort((a, b) => b.total - a.total);
-    sortingText.text("Sortering: Total");
+    sortingText.text("Sortering: Samlet");
   }
 
   animateData(dataset);
 });
 
-// Animer ved sortering
 function animateData(data) {
   yScale = createScaleY(data);
   xScale = createScaleX(data);
@@ -205,13 +204,13 @@ function animateData(data) {
     .attr("fill", d => colorScale(getValueByMetric(d)));
 
   bars.on("mouseover", function (event, d) {
-      d3.select("#tooltip")
+      d3.select("#tekstboksBarchart")
         .style("visibility", "visible")
         .html(`${d.land}: ${getValueByMetric(d).toFixed(1)}`)
         .style("left", (event.pageX + 5) + "px")
         .style("top", (event.pageY - 28) + "px");
     })
-    .on("mouseout", () => d3.select("#tooltip").style("visibility", "hidden"));
+    .on("mouseout", () => d3.select("#tekstboksBarchart").style("visibility", "hidden"));
 
   bars.enter().append("rect")
     .attr("x", d => xScale(d.land))
