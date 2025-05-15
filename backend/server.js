@@ -1,7 +1,7 @@
 import pg from 'pg';
 import dotenv from 'dotenv';
 
-dotenv.config(); // read .env file
+dotenv.config(); // read .env file 
 console.log('Connecting to database', process.env.PG_DATABASE);
 const db = new pg.Pool({
     host:     process.env.PG_HOST,
@@ -10,14 +10,14 @@ const db = new pg.Pool({
     user:     process.env.PG_USER,
     password: process.env.PG_PASSWORD,
     ssl:      { rejectUnauthorized: false },
-});
-const dbResult = await db.query('select now() as now');
+}); //We connect to postgresql
+const dbResult = await db.query('select now() as now'); //From line 14-15 we test the database connection and logs it
 console.log('Database connection established on', dbResult.rows[0].now);
 
 import express from 'express';
 import { title } from 'process';
 
-console.log('Initialising webserver...');
+console.log('Initialising webserver...'); //From line 20-22 we start the web server and sets the port to 3001
 const port = 3001;
 const server = express();
 server.use(express.static('frontend'));
@@ -30,19 +30,18 @@ server.get('/api/onMedicin', onMedicin);
 server.get('/api/onTobak', onTobak);
 server.get('/api/totaleksport', onTotalEksport);
 server.get('/api/totalImport', onTotalImport);
-
-//These will filter our endpoints to show exact years or countries whatever if we need it
-//GET /api/trade/export?year=2023
-//GET /api/trade/import?country=Germany
-
-
 server.listen(port, onServerReady);
 
+
+//This is an Express middleware function — it runs before any specific route handler.
+//Logs the date, HTTP method (GET, POST, etc.), and requested URL to the terminal.
 function onEachRequest(request, response, next) {
     console.log(new Date(), request.method, request.url);
     next();
 }
 
+//This is the callback for when the server is ready.
+//It logs a message to the terminal, so you know the server is live:
 function onServerReady() {
     console.log('Webserver running on port', port);
 }
@@ -52,7 +51,8 @@ async function onGetVigtig_handelpartnere(request,response){
     response.json(dbResult.rows)
 }
 
-//Join import and export tables together for this to show?
+//The function "onKaffe" is called via an api route which is /onKaffe
+//It receives an incoming HTTP request and prepares to send an HTTP response
 async function onKaffe(request, response) {
     const result = await db.query(`
 SELECT DISTINCT
@@ -78,10 +78,15 @@ SELECT DISTINCT
   `);
   response.json(result.rows);
 }
-//This uses a FULL OUTER JOIN on tid (year). This basically means you'll get year from both tables
-//WHERE i.indhold ~ '^[0-9.]+$' OR e.indhold ~ '^[0-9.]+$' filters out rows where indhold (the value) is not a number. 
-// It keeps rows where i.indhold or e.indhold is a valid number. This is also a regex that will check for digits and decimals
-// COALESCE(i.tid, e.tid) chooses the non-null "tid" value from either table. You pretty much sum them all togehter (years)
+//SELECT DISTINCT is pretty self explanatory, we make sure our database doesn't give us duplicates.
+//We are using COALESCE to handle "NULL" 
+//This uses a FULL OUTER JOIN on tid (year). This basically means you'll get data from both tables in one table.
+//WHERE i.indhold ~ '^[0-9.]+$' OR e.indhold ~ '^[0-9.]+$' filters out rows where indhold (the value) is not a number.
+//This avoids empty or non numeric data such as "N/A" or "0"
+//CAST as (float) changes a string like "123.45" to a number. Without the use of CAST you'd be treating numeric strings like text
+////"CAST(i.indhold AS float) IS DISTINCT FROM 0" means to include the row if the import value is not 0 and same for export. This means that it'll remove the rows if both values are 0
+//It keeps rows where i.indhold or e.indhold is a valid number. This is also a regex that will check for digits and decimals
+//We sort the result at the end by "tid" and then "land" using COALESCE to handle "NULL's"
 
 
 async function onMaskiner(request, response) {
