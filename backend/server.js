@@ -22,6 +22,7 @@ const port = 3001;
 const server = express();
 server.use(express.static('frontend'));
 server.use(onEachRequest)
+
 server.get('/api/vigtig_handelpartnere', onGetVigtig_handelpartnere);
 server.get('/api/onKaffe', onKaffe);
 server.get('/api/onMaskiner', onMaskiner);
@@ -46,7 +47,7 @@ function onServerReady() {
     console.log('Webserver running on port', port);
 }
 
-async function onGetVigtig_handelpartnere(request,response){
+async function onGetVIP(request,response){
     const dbResult=await db.query("select ENHED,TID,LAND,INDUD,INDHOLD from Vigtigste_handelspartnere");
     response.json(dbResult.rows)
 }
