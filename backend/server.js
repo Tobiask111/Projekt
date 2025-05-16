@@ -23,7 +23,7 @@ const server = express();
 server.use(express.static('frontend'));
 server.use(onEachRequest)
 
-server.get('/api/vigtig_handelpartnere', onGetVigtig_handelpartnere);
+server.get('/api/VIP', onGetVIP);
 server.get('/api/onKaffe', onKaffe);
 server.get('/api/onMaskiner', onMaskiner);
 server.get('/api/onLevendeDyr', onLevendeDyr);

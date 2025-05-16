@@ -72,3 +72,105 @@ body {
   fill: black;
   text-anchor: middle;
 }
+
+/* Margin and padding removes default inner and outer spacing around and inside elements. The font is set 
+to Poppins and the box-sizing secures that all the information stays inside the box.*/
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+/* This styles a centered white box with rounded corners and internal spacing. */
+.app{
+    background: #fff;
+    width: 90%;
+    max-width: 600px;
+    margin: 100px auto 0;
+    border-radius: 10px;
+    padding: 30px;
+}
+/* Targets the first header element inside the element with class .app. It gives it a clean look with a defined 
+bootom border and spacing. */
+.app h1{
+    font-size: 25px;
+    color: #001e4d;
+    font-weight: 600;
+    border-bottom: 1px solid #333;
+    padding-bottom: 30px;
+}
+/* Adds vertical padding to the .quiz element. */
+.quiz{
+    padding: 20px 0;
+}
+/* Styles the h2 headings inside the .quiz container */
+.quiz h2{
+    font-size: 18px;
+    color: #001e4d;
+    font-weight: 600;
+}
+/* Makes the button have a white background, dark text, rounded corners and an effect when hovered or interacted with */
+.btn{
+    background: #fff;
+    color: #222;
+    font-weight: 500;
+    width: 100%;
+    border: 1px solid #222;
+    padding: 10px;
+    margin: 10px 0;
+    text-align: left;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0,3s;
+}
+/* When the button it changes the button to black and the text to white. And it makes sure that disabled 
+buttons dont respond to the hover effect */
+.btn:hover:not([disabled]){
+    background: #222;
+    color: #fff;
+}
+/* Disables the cursor, so you cant have multiple tries after an answer */
+.btn:disabled{
+    cursor: no-drop;
+}
+/* Makes the next button */
+#next-btn{
+    background: rgb(3, 180, 3);
+    color: #fff;
+    font-weight: 500;
+    width: 150px;
+    border: 0;
+    padding: 10px;
+    margin: 20px auto 0;
+    border-radius: 4px;
+    cursor: pointer;
+    display: none;
+}
+/* When the answer is correct, it makes the button green. When wrong the button goes red */
+.correct{
+    background: #9aeabc;
+}
+.incorrect{
+    background: #ff9393;
+}
+/* Makes the explanation box in the bottom of the page after an answer has been given. */
+.explanation {
+    margin-top: 20px;
+    padding: 15px 20px;
+    background-color: #e6f7ff;
+    border-left: 5px solid #1890ff;
+    border-radius: 6px;
+    color: #003a63;
+    font-size: 16px;
+    line-height: 1.6;
+    font-style: normal;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    display: none;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Makes the explanation button fade in */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
