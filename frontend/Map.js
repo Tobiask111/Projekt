@@ -10,7 +10,7 @@ const svg = d3.select("#Map")
 // Add buttons for toggling between import and export
 
 
-// --- Add this zoom block ---
+// --- Add this zoom block ---np
 const mapGroup = svg.append("g");
 
 const zoom = d3.zoom()
@@ -65,15 +65,28 @@ async function fetchCategoryData(category) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
+
+        // Get the correct field names based on category
+        let exportField, importField;
+        switch(category) {
+            case 'levendeDyr':
+                exportField = 'eksport_levende_dyr';
+                importField = 'import_levendedyr';
+                break;
+            default:
+                exportField = `eksport_${category}`;
+                importField = `import_${category}`;
+        }
+
         return data.map(d => ({
             land: countryNames[d.land] || d.land,
             originalLand: d.land,
-            export: +d[`eksport_${category}`] || 0,
-            import: +d[`import_${category}`] || 0,
+            export: +d[exportField] || 0,
+            import: +d[importField] || 0,
             årstal: +d.tid
         }));
     } catch (error) {
-        console.log('Error fetching data:', error);
+        console.error(`Error fetching ${category} data:`, error);
         return [];
     }
 }
@@ -106,7 +119,7 @@ async function initializeMap() {
         // Populate year dropdown with available years
         updateYearDropdown();
     } catch (error) {
-        console.log('Error initializing map:', error);
+        console.error('Error initializing map:', error);
     }
 }
 
