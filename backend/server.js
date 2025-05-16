@@ -23,7 +23,7 @@ const server = express();
 server.use(express.static('frontend'));
 server.use(onEachRequest)
 
-server.get('/api/vigtig_handelpartnere', onGetVigtig_handelpartnere);
+server.get('/api/VIP', onGetVIP);
 server.get('/api/onKaffe', onKaffe);
 server.get('/api/onMaskiner', onMaskiner);
 server.get('/api/onLevendeDyr', onLevendeDyr);
@@ -48,7 +48,7 @@ function onServerReady() {
 }
 
 async function onGetVIP(request,response){
-    const dbResult=await db.query("select ENHED,TID,LAND,INDUD,INDHOLD from Vigtigste_handelspartnere");
+    const dbResult=await db.query("select ENHED,LAND,INDUD,INDHOLD from Vigtigste_handelspartnere");
     response.json(dbResult.rows)
 }
 
