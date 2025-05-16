@@ -22,7 +22,7 @@ await db.query(`drop table if exists Eksport_Kaffe;
 create table Eksport_Kaffe (
     sitc text not null,
     land text not null,
-    indud text not null check (indud in ('Eksport', 'Import')), check (indud in ('Eksport', 'Import')),
+    indud text not null check (indud in ('Eksport', 'Import')), 
     tid text not null,
     indhold text not null 
 )`);
@@ -33,7 +33,7 @@ drop table if exists Eksport_Levende_dyr;
 create table Eksport_Levende_dyr(
 sitc text not null,
 land text not null,
-indud text not null check (indud in ('Eksport', 'Import')), check (indud in ('Eksport', 'Import')),
+indud text not null check (indud in ('Eksport', 'Import')), 
 tid text not null,
 indhold text not null  
 )`
