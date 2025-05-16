@@ -48,7 +48,7 @@ function onServerReady() {
 }
 
 async function onGetVIP(request,response){
-    const dbResult=await db.query("select ENHED,TID,LAND,INDUD,INDHOLD from Vigtigste_handelspartnere");
+    const dbResult=await db.query("select ENHED,LAND,INDUD,INDHOLD from Vigtigste_handelspartnere");
     response.json(dbResult.rows)
 }
 
