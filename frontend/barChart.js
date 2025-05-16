@@ -15,7 +15,7 @@ let colorScale = null; // We use null because the color scale is not yet created
 
 // Fetches data
 function loadVigtigisteHandelspartnere() {
-  fetch("/api/vigtig_handelpartnere") //Gets the data from the server
+  fetch("/api/VIP") //Gets the data from the server
     .then(response => response.json()) //converts it into json
     .then(data => {
       dataset = processData(data); //Processes the raw data
