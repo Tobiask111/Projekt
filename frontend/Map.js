@@ -73,7 +73,7 @@ async function fetchCategoryData(category) {
             årstal: +d.tid
         }));
     } catch (error) {
-        console.error('Error fetching data:', error);
+        console.log('Error fetching data:', error);
         return [];
     }
 }
@@ -106,7 +106,7 @@ async function initializeMap() {
         // Populate year dropdown with available years
         updateYearDropdown();
     } catch (error) {
-        console.error('Error initializing map:', error);
+        console.log('Error initializing map:', error);
     }
 }
 
