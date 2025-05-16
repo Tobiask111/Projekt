@@ -20,22 +20,22 @@ console.log('Database connection established on', dbResult.rows[0].now);
 // Drop og create alle tabeller
 await db.query(`drop table if exists Eksport_Kaffe;
 create table Eksport_Kaffe (
-    sitc text,
-    land text,
-    indud text,
-    tid text,
-    indhold text
+    sitc text not null,
+    land text not null,
+    indud text not null check (indud in ('Eksport', 'Import')), check (indud in ('Eksport', 'Import')),
+    tid text not null,
+    indhold text not null 
 )`);
 
 console.log('Recreating table Eksport_Levende_dyr');
 await db.query(`
 drop table if exists Eksport_Levende_dyr;
 create table Eksport_Levende_dyr(
-sitc text,
-land text,
-indud text,
-tid text,
-indhold text
+sitc text not null,
+land text not null,
+indud text not null check (indud in ('Eksport', 'Import')), check (indud in ('Eksport', 'Import')),
+tid text not null,
+indhold text not null  
 )`
 );
 
@@ -43,11 +43,11 @@ console.log('Recreating table Eksport_Maskiner');
 await db.query(`
 drop table if exists Eksport_Maskiner;    
 create table Eksport_Maskiner(
-sitc text,
-land text,
-indud text,
-tid text,
-indhold text
+sitc text not null,
+land text not null,
+indud text not null check (indud in ('Eksport', 'Import')),
+tid text not null,
+indhold text not null  
 )`
 );
 
@@ -55,11 +55,11 @@ console.log('Recreating table Eksport_Medicin');
 await db.query(`
 drop table if exists Eksport_Medicin;    
 create table Eksport_Medicin(
-sitc text,
-land text,
-indud text,
-tid text,
-indhold text
+sitc text not null,
+land text not null,
+indud text not null check (indud in ('Eksport', 'Import')),
+tid text not null,
+indhold text not null  
 )`
 );
 
@@ -67,11 +67,11 @@ console.log('Recreating table Eksport_Tobak');
 await db.query(`
 drop table if exists Eksport_Tobak;    
 create table Eksport_Tobak(
-sitc text,
-land text,
-indud text,
-tid text,
-indhold text
+sitc text not null,
+land text not null,
+indud text not null check (indud in ('Eksport', 'Import')),
+tid text not null,
+indhold text not null  
 )`
 );
 
@@ -79,11 +79,11 @@ console.log('Recreating tables...');
 await db.query(`
 drop table if exists Import_Kaffe;
 create table Import_Kaffe (
-sitc text,
-land text,
-indud text,
-tid text,
-indhold text
+sitc text not null,
+land text not null,
+indud text not null check (indud in ('Eksport', 'Import')),
+tid text not null,
+indhold text not null  
 )`
 );
 
@@ -91,11 +91,11 @@ console.log('Recreating tables...');
 await db.query(`
 drop table if exists Import_Levende_dyr;
 create table Import_Levende_dyr(
-sitc text,
-land text,
-indud text,
-tid text,
-indhold text
+sitc text not null,
+land text not null,
+indud text not null check (indud in ('Eksport', 'Import')),
+tid text not null,
+indhold text not null  
 )`
 );
 
@@ -103,11 +103,11 @@ console.log('Recreating tables...');
 await db.query(`
 drop table if exists Import_Maskiner;    
 create table Import_Maskiner(
-sitc text,
-land text,
-indud text,
-tid text,
-indhold text
+sitc text not null,
+land text not null,
+indud text not null check (indud in ('Eksport', 'Import')),
+tid text not null,
+indhold text not null  
 )`
 );
 
@@ -115,11 +115,11 @@ console.log('Recreating tables...');
 await db.query(`
 drop table if exists Import_Medicin;
 create table Import_Medicin(
-sitc text,
-land text,
-indud text,
-tid text,
-indhold text
+sitc text not null,
+land text not null,
+indud text not null check (indud in ('Eksport', 'Import')),
+tid text not null,
+indhold text not null  
 )`
 );
 
@@ -127,34 +127,35 @@ console.log('Recreating tables...');
 await db.query(`
 drop table if exists Import_Tobaksvarer;
 create table Import_Tobaksvarer (
-sitc text,
-land text,
-indud text,
-tid text,
-indhold text
+id serial primary key,
+sitc text not null,
+land text not null,
+indud text not null check (indud in ('Eksport', 'Import')),
+tid text not null,
+indhold text not null  
 )`
 );
 
 await db.query(`
     drop table if exists Import_export;
     create table Import_export (
-    uhbegreb text,
-    indud text,
-    tid text,
-    indhold text
+    uhbegreb text not null,
+    indud text not null check (indud in ('Eksport', 'Import')),
+    tid text not null,
+    indhold text not null  
     )`
 );
 
 await db.query(`
     drop table if exists Vigtigste_Handelspartnere;
     create table Vigtigste_Handelspartnere (
-    post text,
-    enhed text,
-    sæson text,
-    tid text,
-    land text,
-    indud text,
-    indhold numeric
+    post text not null,
+    enhed text not null,
+    sæson text, 
+    tid text not null,
+    land text not null,
+    indud text not null check (indud in ('Exports', 'Imports')),
+    indhold text not null  
     )`
 );
 
