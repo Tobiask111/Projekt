@@ -6,6 +6,42 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
+    <div class="map-container" style="text-align: center;">
+      <h1>Kort over Danmarks handelspartnere</h1>
+      <div class="dropdown-container">
+        <select id="tradeType">
+          <option value="export">Eksport</option>
+          <option value="import">Import</option>
+        </select>
+        <select id="category">
+          <option value="kaffe">Kaffe</option>
+          <option value="maskiner">Maskiner</option>
+          <option value="levendeDyr">Levende dyr</option>
+          <option value="medicin">Medicin</option>
+          <option value="tobak">Tobak</option>
+        </select>
+        <select id="year">
+          <option value="2021">2021</option>
+          <option value="2020">2020</option>
+          <option value="2019">2019</option>
+          <option value="2018">2018</option>
+          <option value="2017">2017</option>
+          <option value="2016">2016</option>
+          <option value="2015">2015</option>
+          <option value="2014">2014</option>
+          <option value="2013">2013</option>
+          <option value="2012">2012</option>
+          <option value="2011">2011</option>
+          <option value="2010">2010</option>
+          <option value="2009">2009</option>
+          <option value="2008">2008</option>
+          <option value="2007">2007</option>
+        </select>
+      </div>
+      <svg id="Map" width="1500" height="700"></svg>
+      <div class="tooltip"></div>
+    </div>
+
     <div id="barChart"></div>
 
     <p>Tryk på knappen for at sortere</p>
@@ -16,10 +52,13 @@
     </div>
     <div id="tekstboksBarchart"></div>
     <br />
+
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script type="module" src="Map.js"></script>
+    <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
     <script src="barChart.js"></script>
     <script src="ButtonsForSite.js"></script>
-     <div class="app">
+    <div class="app">
       <h1>Test din viden om global handel</h1>
       <div class="quiz">
         <h2 id="question">Spørgsmålet vil stå her</h2>
@@ -28,11 +67,11 @@
           <button class="btn">Svarmulighed 2</button>
           <button class="btn">Svarmulighed 3</button>
           <button class="btn">Svarmulighed 4</button>
-      </div>
-      <div id="explanation" class="explanation"></div>
-      <button id="next-btn">Næste spørgsmål</button>
+        </div>
+        <div id="explanation" class="explanation"></div>
+        <button id="next-btn">Næste spørgsmål</button>
       </div>
     </div>
-      <script src="script.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>
