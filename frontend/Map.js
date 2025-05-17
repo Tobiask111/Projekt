@@ -71,7 +71,7 @@ async function fetchCategoryData(category) {
         switch(category) {
             case 'levendeDyr':
                 exportField = 'eksport_levende_dyr';
-                importField = 'import_levendedyr';
+                importField = 'import_levende_dyr';
                 break;
             default:
                 exportField = `eksport_${category}`;
