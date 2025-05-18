@@ -6,7 +6,7 @@ body {
 
 
 #Map {
-  width: 120vw;           
+  width: 100vw;           
   max-width: 1500px;      
   height: auto;           
   max-height: 700px;      
@@ -16,6 +16,7 @@ body {
   border-radius: 4px;
   box-sizing: border-box;
   padding: 0 20px;        
+  border: 1px solid black;
 }
 .dropdown-container {
   margin: 20px 0;
