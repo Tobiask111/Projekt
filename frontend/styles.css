@@ -1,5 +1,7 @@
 body {
   background-color: hsl(60, 55%, 90%);
+  width: 1850px;
+  height: 2350px;
 }
 
 /*Map styling*/
@@ -192,7 +194,7 @@ text-align: center;
   cursor: pointer;
   border: none;
   padding: 10px 15px;
-  margin: 5px;
+  margin: 1px;
   font-size: 15px;
 }
 
