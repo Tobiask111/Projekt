@@ -1,13 +1,21 @@
 body {
   background-color: hsl(60, 55%, 90%);
 }
+
 /*Map styling*/
 
-#map {
+
+#Map {
+  width: 120vw;           
+  max-width: 1500px;      
+  height: auto;           
+  max-height: 700px;      
   display: block;
   margin: 0 auto;
-  background: #0f42b9;
+  background-color: #d8ecf4;
   border-radius: 4px;
+  box-sizing: border-box;
+  padding: 0 20px;        
 }
 .dropdown-container {
   margin: 20px 0;
@@ -32,76 +40,10 @@ body {
   opacity: 0;
   transition: opacity 0.2s;
 }
-/* Knapper – fælles styling */
-#sortByExport{
-  background-color: rgb(4, 235, 4);
-  color: black;
-  cursor: pointer;
-  border: none;
-  padding: 8px 12px;
-  margin: 5px;
-  font-size: 14px;
-  border-radius: 5px;
+.map-container{
+text-align: center;
 }
-
-#sortByImport{
-  background-color: rgb(4, 235, 4);
-  color: black;
-  cursor: pointer;
-  border: none;
-  padding: 8px 12px;
-  margin: 5px;
-  font-size: 14px;
-  border-radius: 5px;
-}
-
-#sortByTotal{
-  background-color: rgb(4, 235, 4);
-  color: black;
-  cursor: pointer;
-  border: none;
-  padding: 8px 12px;
-  margin: 5px;
-  font-size: 14px;
-  border-radius: 5px;
-}
-
-#sortByExport:hover {
-  background-color: darkgreen;
-  color: white;
-}
-
-#sortByImport:hover {
-  background-color: darkgreen;
-  color: white;
-}
-
-#sortByTotal:hover {
-  background-color: darkgreen;
-  color: white;
-}
-
-#tekstboksBarchart {
-  position: absolute;
-  visibility: hidden;
-  background-color: rgba(0, 0, 0, 0.7);
-  color: white;
-  padding: 5px 8px;
-  border-radius: 3px;
-  font-size: 14px;
-  z-index: 10;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-  opacity: 1; /* Opdateret til 1, hvis du ønsker at bruge opacity for at vise den */
-}
-
-/* Teksten over barchart */
-#textboxImportExportTotal {
-  font-size: 16px;
-  font-weight: bold;
-  fill: black;
-  text-anchor: middle;
-}
+/*quiz styling*/
 
 /* Margin and padding removes default inner and outer spacing around and inside elements. The font is set 
 to Poppins and the box-sizing secures that all the information stays inside the box.*/
@@ -116,7 +58,7 @@ to Poppins and the box-sizing secures that all the information stays inside the 
     background: #fff;
     width: 90%;
     max-width: 600px;
-    margin: 100px auto 0;
+    margin: 60px auto 0;
     border-radius: 10px;
     padding: 30px;
 }
@@ -203,4 +145,104 @@ buttons dont respond to the hover effect */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+/*barchart and description and source styling*/
+
+#barChart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px auto 40px;
+  max-width: 1000px;
+}
+
+#barchart-description {
+  max-width: 800px;
+  margin: 20px auto 40px; 
+  padding: 15px 25px;
+  font-family: 'Arial', sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  background-color: lightgray;
+  
+}
+
+#kildeBarchart{
+  font-size: 15px;
+text-align: center;
+}
+
+
+/*barchart buttons and text styling*/
+#sortByExport{
+  background-color: lightgray;
+  color: black;
+  cursor: pointer;
+  border: none;
+   padding: 10px 15px;
+  margin: 5px;
+  font-size: 15px;
+}
+
+#sortByImport{
+  background-color: lightgray;
+  color: black;
+  cursor: pointer;
+  border: none;
+  padding: 10px 15px;
+  margin: 5px;
+  font-size: 15px;
+}
+
+#sortByTotal{
+  background-color: lightgray;
+  color: black;
+  cursor: pointer;
+  border: none;
+ padding: 10px 15px;
+  margin: 5px;
+  font-size: 15px;
+}
+
+#sortByExport:hover {
+  background-color: darkgray;
+  color: black;
+}
+
+#sortByImport:hover {
+  background-color: darkgray;
+  color: black;
+}
+
+#sortByTotal:hover {
+  background-color: darkgray;
+  color: black;
+}
+
+#tekstboksBarchart {
+  position: absolute;
+  visibility: hidden;
+  background-color: black;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 15px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+#textboxImportExportTotal {
+  font-size: 15px;
+  font-weight: bold;
+  fill: black;
+  text-anchor: middle;
+}
+#knappeholder{
+  
+  display: flex;
+  justify-content: center;
+  gap: 10px; 
+  margin: 20px; 
+
 }

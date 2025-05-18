@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <div class="map-container" style="text-align: center;">
+    <div class="map-container">
       <h1>Kort over Danmarks handelspartnere</h1>
       <div class="dropdown-container">
         <select id="tradeType">
@@ -38,40 +38,47 @@
           <option value="2007">2007</option>
         </select>
       </div>
-      <svg id="Map" width="1500" height="700"></svg>
+      <svg id="Map"></svg>
       <div class="tooltip"></div>
     </div>
 
+    <div id="barchart-description">
+  <p>
+    <strong>Herunder viser en søjlediagram over Danmarks handel med udvalgte lande i februar 2025. Diagrammet illustrerer både import og eksport målt i millioner danske kroner (mio. kr.) og giver et overblik over, hvilke lande der udgør Danmarks største handelspartnere. Den samlede handelsværdi (import + eksport) er anvendt som udgangspunkt, men brugeren har mulighed for at sortere søjlerne efter enten import, eksport eller totalværdi via knapper.</strong>
+  </p>
+  </div>
+  <div id="knappeholder">
+    <button id="sortByExport"><strong>Sortér efter eksport</strong></button>
+    <button id="sortByImport"><strong>Sortér efter import</strong></button>
+    <button id="sortByTotal"><strong>Sortér efter samlet handel</strong></button>
+  </div>
+</div>
     <div id="barChart"></div>
+<div id="tekstboksBarchart"></div>
+<div id="kildeBarchart">
+<p><a href="https://www.dst.dk/da/Statistik/emner/oekonomi/betalingsbalance-og-udenrigshandel/import-og-eksport-af-varer-og-tjenester">Kilde: Danmark og deres vigtigste handelspartnere</a></p>
+</div>
 
-    <p>Tryk på knappen for at sortere</p>
-    <div>
-      <button id="sortByExport">Sortér efter eksport</button>
-      <button id="sortByImport">Sortér efter import</button>
-      <button id="sortByTotal">Sortér efter samlet handel</button>
+
+<div class="app">
+  <h1>Test din viden om global handel</h1>
+  <div class="quiz">
+    <h2 id="question">Spørgsmålet vil stå her</h2>
+    <div id="answer-buttons">
+      <button class="btn">Svarmulighed 1</button>
+      <button class="btn">Svarmulighed 2</button>
+      <button class="btn">Svarmulighed 3</button>
+      <button class="btn">Svarmulighed 4</button>
     </div>
-    <div id="tekstboksBarchart"></div>
-    <br />
-
+    <div id="explanation" class="explanation"></div>
+    <button id="next-btn">Næste spørgsmål</button>
+  </div>
+</div>
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
     <script type="module" src="Map.js"></script>
     <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
     <script src="barChart.js"></script>
     <script src="ButtonsForSite.js"></script>
-    <div class="app">
-      <h1>Test din viden om global handel</h1>
-      <div class="quiz">
-        <h2 id="question">Spørgsmålet vil stå her</h2>
-        <div id="answer-buttons">
-          <button class="btn">Svarmulighed 1</button>
-          <button class="btn">Svarmulighed 2</button>
-          <button class="btn">Svarmulighed 3</button>
-          <button class="btn">Svarmulighed 4</button>
-        </div>
-        <div id="explanation" class="explanation"></div>
-        <button id="next-btn">Næste spørgsmål</button>
-      </div>
-    </div>
     <script src="script.js"></script>
   </body>
 </html>

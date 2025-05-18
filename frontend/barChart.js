@@ -27,7 +27,7 @@ function loadVigtigisteHandelspartnere() {
 loadVigtigisteHandelspartnere();
 
 //Adds an SVG element to the page with defined width and height.
-const svg = d3.select("body").append("svg")
+const svg = d3.select("#barChart").append("svg")
   .attr("width", w)
   .attr("height", h);
 
