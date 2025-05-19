@@ -8,7 +8,7 @@ const axisPadding = 70;
 let dataset = [];
 
 //A variable that tracks the currently selected metric (e.g., exports, imports, or total).
-let currentMetric = "Total";
+let currentMetric = "total";
 
 //A variable that is needed to change the color of the bars based on their values. 
 let colorScale = null; // We use null because the color scale is not yet created
@@ -27,7 +27,7 @@ function loadVigtigisteHandelspartnere() {
 loadVigtigisteHandelspartnere();
 
 //Adds an SVG element to the page with defined width and height.
-const svg = d3.select("body").append("svg")
+const svg = d3.select("#barChart").append("svg")
   .attr("width", w)
   .attr("height", h);
 
@@ -251,7 +251,7 @@ function addAxes() {
 d3.selectAll("#sortByExport, #sortByImport, #sortByTotal").on("click", function (e) {
   
   //saves the ID on a button that has been clicked
-  const id = e.target.id;
+  const id = this.id; // I stedet for e.target.id
 
   //If statement that when run it will set "currentMetric" to "a.eksport" and sort the dataset descending also updates the text on screen tp "sortering: Eksport"
   if (id === "sortByExport") {

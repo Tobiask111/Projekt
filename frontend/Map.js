@@ -14,8 +14,11 @@ const svg = d3.select("#Map")
 // --- Add this zoom block 
 const mapGroup = svg.append("g");
 
+
+
 const zoom = d3.zoom()
-    .scaleExtent([1, 8])
+    .scaleExtent([1, 8]) // zoom
+    .translateExtent([[0, 0], [width, height]]) //limits the dragging area as to not get lost while trying to get a better look
     .on("zoom", (event) => {
         mapGroup.attr("transform", event.transform);
     });
