@@ -188,8 +188,8 @@ await upload(
 
 await upload(
     db,
-    'db/data/Eksport_Kaffe.csv',
-    `copy Eksport_Kaffe (sitc, land, indud, tid, indhold) from stdin with csv header delimiter ';'`
+    'db/data/Eksport_tobak.csv',
+    `copy Eksport_tobak (sitc, land, indud, tid, indhold) from stdin with csv header delimiter ';'`
 );
 
 
