@@ -6,7 +6,6 @@ const width = 1200, height = 700;
 const svg = d3.select("#Map")
     .attr("width", width)
     .attr("height", height)
-    .style("background-color", "white")
     .style("border-radius", "25px");
 
 
