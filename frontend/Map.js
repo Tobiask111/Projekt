@@ -27,8 +27,8 @@ svg.call(zoom);
 
 // 2. Set up projection
 const projection = d3.geoMercator()
-    .scale(150)
-    .translate([width/2.5, height/2]);
+    .scale(width/11)
+    .translate([width/2.5, height/1.8]);
 
 const path = d3.geoPath().projection(projection);
 

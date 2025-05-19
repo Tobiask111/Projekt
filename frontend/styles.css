@@ -6,16 +6,16 @@ body {
 
 
 #Map {
-  width: auto; 
-  max-width: 1500px;                
-  height: auto;           
-  max-height: 700px;      
+  width: 85vw;                /* Fylder hele bredden af browseren */
+  max-width: 100%;             /* Undgår at overskride bredden */
+  height: 80vh;                /* Fylder 80% af højden på skærmen */
+  max-height: 100vh;           /* Undgår at blive højere end vinduet */
   display: block;
   margin: 0 auto;
   background-color: #d8ecf4;
   border-radius: 4px;
   box-sizing: border-box;
-  padding: 0 20px;        
+  padding: 0 20px;
   border: 1px solid black;
 }
 .dropdown-container {
