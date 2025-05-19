@@ -169,10 +169,6 @@ buttons dont respond to the hover effect */
   
 }
 
-#kildeBarchart{
-  font-size: 15px;
-text-align: center;
-}
 
 
 /*barchart buttons and text styling*/
@@ -240,10 +236,14 @@ text-align: center;
   text-anchor: middle;
 }
 #knappeholder{
-  
   display: flex;
   justify-content: center;
   gap: 10px; 
   margin: 20px; 
 
+}
+/* kilde styling */
+#kilde{
+  font-size: 15px;
+text-align: center;
 }
