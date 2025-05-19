@@ -1,6 +1,7 @@
 import { countryNames } from './Name_Mapping.js';
 
-const width = 1200, height = 700;
+const width = window.innerWidth;
+const height = window.innerHeight;
 
 // 1. Create SVG container
 const svg = d3.select("#Map")
@@ -27,7 +28,7 @@ svg.call(zoom);
 // 2. Set up projection
 const projection = d3.geoMercator()
     .scale(150)
-    .translate([width/2, height/1.4]);
+    .translate([width/2.5, height/2]);
 
 const path = d3.geoPath().projection(projection);
 
