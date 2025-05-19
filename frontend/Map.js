@@ -1,16 +1,17 @@
 import { countryNames } from './Name_Mapping.js';
 
-const width = 1500, height = 700;
+const width = 1200, height = 700;
 
 // 1. Create SVG container
 const svg = d3.select("#Map")
     .attr("width", width)
-    .attr("height", height);
+    .attr("height", height)
+    .style("background-color", "white")
+    .style("border-radius", "25px");
 
-// Add buttons for toggling between import and export
 
 
-// --- Add this zoom block ---np
+// --- Add this zoom block 
 const mapGroup = svg.append("g");
 
 const zoom = d3.zoom()

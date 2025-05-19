@@ -3,6 +3,10 @@ body {
 }
 /*Map styling*/
 
+.map-container h1 {
+  padding-top: 20px;
+}
+
 #map {
   display: block;
   margin: 0 auto;
