@@ -1,45 +1,46 @@
 import { countryNames } from './Name_Mapping.js';
 
+// Get viewport dimensions for responsive sizing
 const width = window.innerWidth;
 const height = window.innerHeight;
 
-// 1. Create SVG container
+// Create main SVG container with viewport dimensions
 const svg = d3.select("#Map")
     .attr("width", width)
     .attr("height", height)
     .style("border-radius", "25px");
 
-
-
-// --- Add this zoom block 
+// Create group for map elements to enable zooming
 const mapGroup = svg.append("g");
 
-
-
+// Configure zoom behavior with min/max scale and drag limits
 const zoom = d3.zoom()
-    .scaleExtent([1, 8]) // zoom
-    .translateExtent([[0, 0], [width, height]]) //limits the dragging area as to not get lost while trying to get a better look
+    .scaleExtent([1, 8]) // Allow zooming between 1x and 8x
+    .translateExtent([[0, 0], [width, height]]) // Limit panning to viewport
     .on("zoom", (event) => {
         mapGroup.attr("transform", event.transform);
     });
 
+// Apply zoom behavior to SVG
 svg.call(zoom);
 
-// 2. Set up projection
+// Set up Mercator projection for world map
 const projection = d3.geoMercator()
-    .scale(width/11)
-    .translate([width/2.5, height/1.8]);
+    .scale(width/11) // Scale map based on viewport width
+    .translate([width/2.5, height/1.8]); // Position map center point
 
+// Create path generator for drawing country boundaries
 const path = d3.geoPath().projection(projection);
 
-// Store current state
+// Store current visualization state
 let currentState = {
-    tradeType: 'export',
-    category: 'kaffe',
+    tradeType: 'export', // Default trade type
+    category: 'kaffe', // Default category
     year: '2021'  // Default year
 };
 
-// API endpoint mapping
+
+// Map categories to their API endpoints
 const categoryEndpoints = {
     kaffe: '/api/onKaffe',
     maskiner: '/api/onMaskiner',
@@ -48,7 +49,7 @@ const categoryEndpoints = {
     tobak: '/api/onTobak'
 };
 
-// Category display names
+// Add readable category names for display
 const categoryDisplayNames = {
     kaffe: 'Kaffe',
     maskiner: 'Maskiner',
@@ -57,11 +58,12 @@ const categoryDisplayNames = {
     tobak: 'Tobak'
 };
 
-let geoDataWithValues;
-let worldGeoData;
-let rawCategoryData; // Store the raw data for filtering by year
+// Global variables for storing map data
+let geoDataWithValues; // Combined geographic and trade data
+let worldGeoData;      // Raw geographic data
+let rawCategoryData;   // Raw trade data for current category
 
-// Function to fetch and process data for a category
+// Fetch and process trade data for selected category
 async function fetchCategoryData(category) {
     try {
         const response = await fetch(categoryEndpoints[category]);
@@ -70,7 +72,7 @@ async function fetchCategoryData(category) {
         }
         const data = await response.json();
 
-        // Get the correct field names based on category
+        // Determine field names based on category type
         let exportField, importField;
         switch(category) {
             case 'levendeDyr':
@@ -82,6 +84,7 @@ async function fetchCategoryData(category) {
                 importField = `import_${category}`;
         }
 
+        // Transform data into standardized format
         return data.map(d => ({
             land: countryNames[d.land] || d.land,
             originalLand: d.land,
@@ -95,16 +98,16 @@ async function fetchCategoryData(category) {
     }
 }
 
-// Initialize the map
+// Initialize map and set up event listeners
 async function initializeMap() {
     try {
-        // Fetch world GeoJSON data
+        // Load world map data
         worldGeoData = await d3.json("https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json");
         
-        // Fetch initial category data
+        // Load initial trade data
         await updateMapData();
 
-        // Add event listeners for dropdowns
+        // Set up dropdown event listeners
         d3.select("#tradeType").on("change", async function() {
             currentState.tradeType = this.value;
             updateMap();
@@ -120,33 +123,34 @@ async function initializeMap() {
             await updateMapWithYear();
         });
 
-        // Populate year dropdown with available years
+        // Initialize year dropdown
         updateYearDropdown();
     } catch (error) {
         console.error('Error initializing map:', error);
     }
 }
 
-// Update year dropdown based on available data
+// Update year dropdown options based on available data
 function updateYearDropdown() {
     if (!rawCategoryData) return;
 
+    // Get unique years and sort in descending order
     const availableYears = [...new Set(rawCategoryData.map(d => d.årstal))]
-        .sort((a, b) => b - a); // Sort years in descending order
+        .sort((a, b) => b - a);
 
     const yearSelect = d3.select("#year");
     
-    // Save current selection
+    // Remember current selection
     const currentYear = yearSelect.property("value");
     
-    // Update options
+    // Update dropdown options
     yearSelect.selectAll("option")
         .data(availableYears)
         .join("option")
         .attr("value", d => d)
         .text(d => d);
 
-    // Restore selection if it exists in new data, otherwise select latest year
+    // Restore previous selection or use latest year
     if (availableYears.includes(+currentYear)) {
         yearSelect.property("value", currentYear);
     } else {
@@ -162,12 +166,12 @@ async function updateMapData() {
     await updateMapWithYear();
 }
 
-// Update map with filtered data for selected year
+// Update map visualization with data for selected year
 async function updateMapWithYear() {
-    // Filter data for selected year
+    // Filter data for current year
     const yearData = rawCategoryData.filter(d => d.årstal.toString() === currentState.year);
     
-    // Create data lookup map
+    // Create lookup map for quick data access
     const dataMap = new Map(yearData.map(d => [d.land, {
         export: d.export,
         import: d.import,
@@ -175,7 +179,7 @@ async function updateMapWithYear() {
         årstal: d.årstal
     }]));
 
-    // Merge data with GeoJSON
+    // Combine geographic and trade data
     geoDataWithValues = {
         ...worldGeoData,
         features: worldGeoData.features.map(feature => {
@@ -198,8 +202,9 @@ async function updateMapWithYear() {
     updateMap();
 }
 
+// Update map visualization
 function updateMap() {
-    // Update map
+    // Draw country boundaries
     mapGroup.selectAll("path")
         .data(geoDataWithValues.features.filter(f => 
             f.properties.name !== "Bermuda" && 
@@ -218,21 +223,24 @@ function updateMap() {
         .on("mouseleave", mouseLeave);
 }
 
-// Tooltip functions
+// Tooltip functions for interactive features
 const tooltip = d3.select(".tooltip");
 
+// Handle mouse hover over countries
 function mouseOver(event, d) {
-    // Only show tooltip for actual countries
+    // Skip non-country areas
     if (d.properties.name === "Bermuda" || 
         d.properties.name === "Antarctica" || 
         d.properties.name === "Seven seas (open ocean)") {
         return;
     }
 
+    // Highlight country
     d3.select(event.currentTarget)
         .attr("fill", "#7aa6c2")
         .attr("stroke", "#fff");
     
+    // Show tooltip with trade data
     const value = currentState.tradeType === 'export' ? d.properties.export : d.properties.import;
     const typeText = currentState.tradeType === 'export' ? 'Eksport' : 'Import';
     const categoryText = categoryDisplayNames[currentState.category];
@@ -243,12 +251,14 @@ function mouseOver(event, d) {
                År: ${currentState.year}`);
 }
 
+// Update tooltip position on mouse move
 function mouseMove(event) {
     tooltip
         .style("left", (event.pageX + 15) + "px")
         .style("top", (event.pageY - 28) + "px");
 }
 
+// Reset country appearance when mouse leaves
 function mouseLeave(event, d) {
     d3.select(event.currentTarget)
         .attr("fill", "#1e6d8c")
@@ -258,5 +268,5 @@ function mouseLeave(event, d) {
     tooltip.style("opacity", 0);
 }
 
-// Initialize the map when the script loads
+// Start the map when script loads
 initializeMap();
