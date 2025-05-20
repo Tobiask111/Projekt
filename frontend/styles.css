@@ -44,6 +44,7 @@ body {
 }
 .map-container{
 text-align: center;
+font-size: 18px;
 }
 /*quiz styling*/
 
@@ -230,6 +231,10 @@ buttons dont respond to the hover effect */
   pointer-events: none;
 }
 
+#knapperpåsiden{
+  text-align: center;
+}
+
 #textboxImportExportTotal {
   font-size: 15px;
   font-weight: bold;
@@ -248,4 +253,49 @@ buttons dont respond to the hover effect */
   font-size: 15px;
 text-align: center;
 margin-bottom: 100px;
+}
+
+/* header styling*/
+#Header{
+  text-align: center;
+}
+
+/*buttons styling*/
+#worldmapknap{
+  background-color: lightgray;
+  color: black;
+  cursor: pointer;
+  border: none;
+   padding: 10px 15px;
+  margin: 5px;
+  font-size: 15px;
+}
+#barchartknap{
+  background-color: lightgray;
+  color: black;
+  cursor: pointer;
+  border: none;
+   padding: 10px 15px;
+  margin: 5px;
+  font-size: 15px;
+}
+#quizknap{
+  background-color: lightgray;
+  color: black;
+  cursor: pointer;
+  border: none;
+   padding: 10px 15px;
+  margin: 5px;
+  font-size: 15px;
+}
+
+/*Introduktion styling*/
+#intruduktionstekst{
+    max-width: 800px;
+  margin: 20px auto 40px; 
+  padding: 15px 25px;
+  font-family: 'Arial', sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  background-color: lightgray;
 }
