@@ -1,5 +1,4 @@
-    //This array holds all of the questions in the quiz. Every object contains a question, 
-    //an array of answers where one of them is true and an explanation.
+    //This array holds all of the questions in the quiz. Every object contains a question, an array of answers where one of them is true and an explanation.
 
 const questions = [
 
