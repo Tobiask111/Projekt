@@ -63,6 +63,7 @@ to Poppins and the box-sizing secures that all the information stays inside the 
     max-width: 600px;
     margin: 20px auto;
     border-radius: 10px;
+    border: 1px solid black;
     padding: 30px;
 }
 /* Targets the first header element inside the element with class .app. It gives it a clean look with a defined 
