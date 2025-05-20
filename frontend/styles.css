@@ -161,13 +161,14 @@ buttons dont respond to the hover effect */
 }
 
 #barchart-description {
-  max-width: 800px;
+      max-width: 800px;
   margin: 20px auto 40px; 
   padding: 15px 25px;
   font-family: 'Arial', sans-serif;
   font-size: 15px;
   line-height: 1.5;
-  background-color: lightgray;
+  background-color: white;
+  border: 2px solid cyan;
   
 }
 
@@ -178,7 +179,7 @@ buttons dont respond to the hover effect */
   background-color: lightgray;
   color: black;
   cursor: pointer;
-  border: none;
+  border: 1px solid black;
    padding: 10px 15px;
   margin: 5px;
   font-size: 15px;
@@ -188,9 +189,9 @@ buttons dont respond to the hover effect */
   background-color: lightgray;
   color: black;
   cursor: pointer;
-  border: none;
+  border: 1px solid black;
   padding: 10px 15px;
-  margin: 1px;
+  margin: 5px;
   font-size: 15px;
 }
 
@@ -198,7 +199,7 @@ buttons dont respond to the hover effect */
   background-color: lightgray;
   color: black;
   cursor: pointer;
-  border: none;
+  border: 1px solid black;
  padding: 10px 15px;
   margin: 5px;
   font-size: 15px;
@@ -265,7 +266,7 @@ margin-bottom: 100px;
   background-color: lightgray;
   color: black;
   cursor: pointer;
-  border: none;
+  border: 1px solid black;
    padding: 10px 15px;
   margin: 5px;
   font-size: 15px;
@@ -274,7 +275,7 @@ margin-bottom: 100px;
   background-color: lightgray;
   color: black;
   cursor: pointer;
-  border: none;
+  border: 1px solid black;
    padding: 10px 15px;
   margin: 5px;
   font-size: 15px;
@@ -283,7 +284,7 @@ margin-bottom: 100px;
   background-color: lightgray;
   color: black;
   cursor: pointer;
-  border: none;
+  border: 1px solid black;
    padding: 10px 15px;
   margin: 5px;
   font-size: 15px;
@@ -297,5 +298,11 @@ margin-bottom: 100px;
   font-family: 'Arial', sans-serif;
   font-size: 15px;
   line-height: 1.5;
-  background-color: lightgray;
+  background-color: white;
+  border: 2px solid cyan;
+}
+
+.OBS{
+  text-align: center;
+  border: 1px solid black;
 }
