@@ -14,34 +14,24 @@ const questions = [
         explanation: "Import dækker over varer og tjenester, vi køber fra udlandet, mens eksport er det, vi sælger til udlandet. Det er grundlæggende for al udenrigshandel."
     },
     {
-        question: "Hvem er Danmarks største handelspartner ifm. eksport i marts 2025?",
+        question: "Hvem er Danmarks største handelspartner ifm. eksport i februar 2025?",
         answers: [
             { text: "Kina", correct: false},
             { text: "USA", correct: true},
             { text: "Tyskland", correct: false},
             { text: "Sverige", correct: false}
         ],
-        explanation: "Ifølge Danmarks Statistik eksporterede Danmark for 30 032.9 millioner kr. i varer og ydelser til USA i marts 2025."
+        explanation: "Ifølge Danmarks Statistik eksporterede Danmark for 27152.7 millioner kr. i varer og ydelser til USA i februar 2025."
     },
     {
-        question: "Hvem er Danmarks største handelspartner ifm. import i marts 2025?",
+        question: "Hvem er Danmarks største handelspartner ifm. import i februar 2025?",
         answers: [
             { text: "Sverige", correct: false},
             { text: "Norge", correct: false},
             { text: "Storbritanien", correct: false},
             { text: "Tyskland", correct: true}
         ],
-         explanation: "Ifølge Danmarks Statistik importerede Danmark for 20 171.8 millioner kr. i varer og ydelser fra Tyskland i marts 2025."
-    },
-    {
-         question: "Hvilket land eksporterede Danmark mest kød og kødvarer til i 2021",
-        answers: [
-            { text: "Australien", correct: false},
-            { text: "USA", correct: false},
-            { text: "Kina", correct: true},
-            { text: "Italien", correct: false}
-        ],
-        explanation: "Ifølge Danmarks Statistik eksporterede Danmark for 7.744.970.000 kr til Kina i kød og kødvarer i 2021"
+         explanation: "Ifølge Danmarks Statistik importerede Danmark for 19439.5 millioner kr. i varer og ydelser fra Tyskland i februar 2025."
     },
     {
         question: "Hvilken af følgende varer er blandt Danmarks største eksportprodukter?",
@@ -54,7 +44,7 @@ const questions = [
         explanation: "Ifølge Danmarks Statistik er medicinalvarer blandt de største varegrupper i dansk eksport. Medicinalindustrien har en betydelig vægt i den samlede industri, og eksporten af medicinalvarer er steget kraftigt i de senere år."
     },
      {
-        question: "Hvad eksporteres der mest af i tjenesteydelser?",
+        question: "Hvad eksporterer Danmark mest af inden for tjenesteydelser?",
         answers: [
             { text: "IT- og informationstjenester", correct: false},
             { text: "Søtransport", correct: true},
@@ -73,6 +63,16 @@ const questions = [
         ],
         explanation: "Ifølge Danmarks Statistik var den samlede eksport i marts 2025 på 174,3 mia. kr. et tal, der inkluderer både varer og tjenester."
     },
+        {
+         question: "Hvilket land eksporterede Danmark flest levende dyr til i 2021",
+        answers: [
+            { text: "Rusland", correct: false},
+            { text: "USA", correct: false},
+            { text: "Tyskland", correct: true},
+            { text: "Polen", correct: false}
+        ],
+        explanation: "Ifølge Danmarks Statistik eksporterede Danmark for 3.376.846.000 kr levende dyr til Tyskland i 2021"
+    },
      {
         question: "Hvilken af følgende brancher har størst andel i eksporten af tjenester?",
         answers: [
@@ -82,17 +82,7 @@ const questions = [
             { text: "Landbruget", correct: false}
         ],
         explanation: "Transport, især søfart, er en af Danmarks vigtigste tjenesteeksporter og står for en betydelig del af betalingsbalancen."
-    },
-    {
-        question: "Hvordan ændrede eksporten sig i 1. kvartal 2025?",
-        answers: [
-            { text: "Den faldt med 3,6 %", correct: true},
-            { text: "Den steg med 2,5 %", correct: false},
-            { text: "Den var uændret", correct: false},
-            { text: "Den faldt med 0,5 %", correct: false}
-        ],
-        explanation: "Ifølge Danmarks Statistik viste de sæsonkorrigerede tal for første kvartal 2025, at eksporten af varer og tjenester samlet set faldt med 3,6 %. Dette fald afspejlede en nedgang i både vare- og tjenesteeksporten."
-    },
+    }
 ];
 
 //These lines are refering to the HTML elements that will be manipulated.
