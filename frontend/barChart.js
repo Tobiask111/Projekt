@@ -260,17 +260,8 @@ function addAxes() {
     .attr("x", -h / 2)
     .attr("dy", "1em")
     .style("text-anchor", "middle")
-    .text("Værdi i mio. kr.");
+    .text("i mio. kr.");
 }
-
-      //Addition of text on the y-axis
-  svg.append("text")
-    .attr("transform", "rotate(-90)")
-    .attr("y", padding)
-    .attr("x", -h / 2)
-    .attr("dy", "1em")
-    .style("text-anchor", "middle")
-    .text("Værdi i mio. kr.");
 
 //d3 select all 3 buttons and when they are clicked the function will run
 d3.selectAll("#sortByExport, #sortByImport, #sortByTotal").on("click", function (e) {
