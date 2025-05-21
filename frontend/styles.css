@@ -12,7 +12,7 @@ body {
   max-height: 100vh;           /* Undgår at blive højere end vinduet */
   display: block;
   margin: 0 auto;
-  background-color: #d8ecf4;
+  background-color: lightsteelblue;
   border-radius: 4px;
   box-sizing: border-box;
   padding: 0 20px;
@@ -160,6 +160,8 @@ buttons dont respond to the hover effect */
   align-items: center;
   margin: 30px auto 40px;
   max-width: 1000px;
+  background-color: lightsteelblue;
+  border: 1px solid black;
 }
 
 #barchart-description {
@@ -255,7 +257,8 @@ buttons dont respond to the hover effect */
 #kilde{
   font-size: 15px;
 text-align: center;
-margin-bottom: 100px;
+margin-top: 1px;
+margin-bottom: 200px;
 }
 
 /* header styling*/

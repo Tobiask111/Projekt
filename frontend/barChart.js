@@ -3,6 +3,16 @@ const w = 1000;
 const h = 500;
 const padding = 10;
 const axisPadding = 70;
+const countryTranslation = {
+  "France": "Frankrig",
+  "United Kingdom": "Storbritannien",
+  "Netherlands": "Holland",
+  "Norway": "Norge",
+  "Sweden": "Sverige",
+  "China": "Kina",
+  "Germany": "Tyskland",
+  "United States": "USA"
+};
 
 //We use let here to create an empty array where we can place data in later.
 let dataset = [];
@@ -74,10 +84,10 @@ function processData(data) {
     else if (indud === 'Imports') result[land].import = value;
   });
 
-  //Here every country is collected in an array where they each include 
+   //Here every country is collected in an array where they each include 
   return Object.keys(result).map(land => ({
-    //country name
-    land,
+    //translates countries if possible
+    land: countryTranslation[land] || land,
 
     //export for the country
     eksport: result[land].eksport,
