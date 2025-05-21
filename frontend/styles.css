@@ -1,5 +1,9 @@
 body {
-  background-color: #f8fafc;
+  background-image: url("34378561_v915-techi-010-a.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
 }
 
 /*Map styling*/
@@ -76,7 +80,7 @@ to Poppins and the box-sizing secures that all the information stays inside the 
 bootom border and spacing. */
 .app h1{
     font-size: 25px;
-    color: #000;
+    color: #001e4d;
     font-weight: 600;
     border-bottom: 1px solid #333;
     padding-bottom: 30px;
@@ -88,7 +92,7 @@ bootom border and spacing. */
 /* Styles the h2 headings inside the .quiz container */
 .quiz h2{
     font-size: 18px;
-    color: #000;
+    color: #001e4d;
     font-weight: 600;
 }
 /* Makes the button have a white background, dark text, rounded corners and an effect when hovered or interacted with */
@@ -337,5 +341,6 @@ margin-bottom: 100px;
 
 .OBS{
   text-align: center;
+  border-radius: 6px;
   border: 1px solid black;
 }
