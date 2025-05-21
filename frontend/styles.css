@@ -17,7 +17,7 @@ body {
   box-sizing: border-box;
   padding: 0 20px;
   border: 1px solid black;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .dropdown-container {
   margin: 20px 0;
@@ -159,6 +159,7 @@ buttons dont respond to the hover effect */
   justify-content: center;
   align-items: center;
   margin: 30px auto 40px;
+  margin-bottom: 10px;
   max-width: 1000px;
   background-color: lightsteelblue;
   border: 1px solid black;
@@ -257,13 +258,14 @@ buttons dont respond to the hover effect */
 #kilde{
   font-size: 15px;
 text-align: center;
-margin-top: 1px;
-margin-bottom: 200px;
+padding-top: 1px;
+margin-bottom: 100px;
 }
 
-/* header styling*/
+/* header/titel styling*/
 #Header{
   text-align: center;
+  font-size: 30px;
 }
 
 /*buttons styling*/
@@ -273,6 +275,8 @@ margin-bottom: 200px;
   cursor: pointer;
   border: 1px solid black;
    padding: 10px 15px;
+  margin-top: 35px;
+  margin-bottom: 25px;
   margin: 5px;
   font-size: 15px;
 }
@@ -282,6 +286,8 @@ margin-bottom: 200px;
   cursor: pointer;
   border: 1px solid black;
    padding: 10px 15px;
+ margin-top: 35px;
+  margin-bottom: 25px;
   margin: 5px;
   font-size: 15px;
 }
@@ -291,6 +297,8 @@ margin-bottom: 200px;
   cursor: pointer;
   border: 1px solid black;
    padding: 10px 15px;
+  margin-top: 35px;
+  margin-bottom: 25px;
   margin: 5px;
   font-size: 15px;
 }
