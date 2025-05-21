@@ -172,7 +172,7 @@ buttons dont respond to the hover effect */
   font-size: 15px;
   line-height: 1.5;
   background-color: white;
-  border: 2px solid cyan;
+  border: 2px solid black;
   
 }
 
@@ -304,7 +304,7 @@ margin-bottom: 200px;
   font-size: 15px;
   line-height: 1.5;
   background-color: white;
-  border: 2px solid cyan;
+  border: 2px solid rgba(0, 0, 0);
 }
 
 .OBS{
