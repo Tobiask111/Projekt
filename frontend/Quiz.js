@@ -42,26 +42,6 @@ const questions = [
         ],
         explanation: "Ifølge Danmarks Statistik er medicinalvarer blandt de største varegrupper i dansk eksport. Medicinalindustrien har en betydelig vægt i den samlede industri, og eksporten af medicinalvarer er steget kraftigt i de senere år."
     },
-     {
-        question: "Hvad eksporterer Danmark mest af inden for tjenesteydelser?",
-        answers: [
-            { text: "IT- og informationstjenester", correct: false},
-            { text: "Søtransport", correct: true},
-            { text: "Hotel restauration", correct: false},
-            { text: "Finansielle tjenesteydelser", correct: false}
-        ],
-        explanation: "Danmark har en stærk shippingsektor (bl.a. Mærsk). Søtransport er en af de største eksportindtægter på tjenestesiden."
-    },
-    {
-        question: "Hvor stort var Danmarks eksportbeløb i marts 2025",
-        answers: [
-            { text: "94,2 mia. kr.", correct: false},
-            { text: "204,3 mia. kr.", correct: false},
-            { text: "174,3 mia. kr.", correct: true},
-            { text: "124,3 mia. kr.", correct: false}
-        ],
-        explanation: "Ifølge Danmarks Statistik var den samlede eksport i marts 2025 på 174,3 mia. kr. et tal, der inkluderer både varer og tjenester."
-    },
         {
          question: "Hvilket land eksporterede Danmark flest levende dyr til i 2021",
         answers: [
@@ -71,16 +51,6 @@ const questions = [
             { text: "Polen", correct: false}
         ],
         explanation: "Ifølge Danmarks Statistik eksporterede Danmark for 3.376.846.000 kr levende dyr til Tyskland i 2021"
-    },
-     {
-        question: "Hvilken af følgende brancher har størst andel i eksporten af tjenester?",
-        answers: [
-            { text: "Byggebranchen", correct: false},
-            { text: "Transportbranchen", correct: true},
-            { text: "Det offentlige", correct: false},
-            { text: "Landbruget", correct: false}
-        ],
-        explanation: "Transport, især søfart, er en af Danmarks vigtigste tjenesteeksporter og står for en betydelig del af betalingsbalancen."
     }
 ];
 
