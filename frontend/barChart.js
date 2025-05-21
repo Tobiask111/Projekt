@@ -224,6 +224,12 @@ function createDefaultChart(dataset) {
 
 function addAxes() {
 
+  svg.append("g")
+  .attr("transform", `translate(${padding + axisPadding},0)`)
+  .attr("id", "yAxis")
+  .call(yAxis);
+
+
   //appends g groups
   svg.append("g")
 
@@ -246,6 +252,15 @@ function addAxes() {
     .attr("transform", `translate(${padding + axisPadding},0)`)
     .attr("id", "yAxis")
     .call(yAxis);
+
+      //Addition of text on the y-axis
+  svg.append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", padding)
+    .attr("x", -h / 2)
+    .attr("dy", "1em")
+    .style("text-anchor", "middle")
+    .text("Værdi i mio. kr.");
 }
 
       //Addition of text on the y-axis
