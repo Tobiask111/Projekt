@@ -8,6 +8,14 @@ body {
 
 /*Map styling*/
 
+#Billede {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+
+
 
 #Map {
   width: 85vw;                /* Fylder hele bredden af browseren */
