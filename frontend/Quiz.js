@@ -137,13 +137,20 @@ explanationElement.style.display = "block";
 }
 
 //When the quiz is over the score gets shown. It display how many correct answers the user got out of the total questions. 
-//Then a try again button appers to restart the quiz.
+//You also get links referred to where the information is from. Then a try again button appers to restart the quiz.
 
-function showScore(){
+function showScore() {
     resetState();
-    questionElement.innerHTML = `Du svarede rigtigt på ${score} ud af ${questions.length}!`;
-    nextButton.innerHTML = "Prøv igen"
-    nextButton.style.display = "block"
+    questionElement.innerHTML = `   
+        <p><strong>Du svarede rigtigt på ${score} ud af ${questions.length}!</strong></p>
+        <p style="margin-top: 1em;">Følg disse links for at blive klogere på emnet:</p>
+        <p>
+            <a href="https://www.dst.dk/en/Statistik/emner/oekonomi/betalingsbalance-og-udenrigshandel/import-og-eksport-af-varer-og-tjenester" target="_blank">Import og eksport af varer og tjenester</a><br>
+            <a href="https://www.dst.dk/da/Statistik/emner/oekonomi/betalingsbalance-og-udenrigshandel/detaljeret-import-og-eksport" target="_blank">Detaljeret import og eksport</a>
+        </p>
+    `;
+    nextButton.innerHTML = "Prøv igen";
+    nextButton.style.display = "block";
 }
 
 //This function moves to the next question. If there are no more question, then the score appears.
@@ -171,4 +178,3 @@ nextButton.addEventListener("click", () =>{
 //This just makes the quiz automatically start when the page gets loaded.
 
 startQuiz();
-
