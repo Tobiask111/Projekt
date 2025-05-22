@@ -10,8 +10,12 @@ body {
 
 #Billede {
 text-align: center;
-transform: scale(1.2);
+transform: scale(1.4);
   transform-origin: center;
+  padding-top: 60px;
+  padding-bottom: 50px;
+  position: relative;
+  z-index: 1;
 }
 
 
@@ -261,6 +265,8 @@ buttons dont respond to the hover effect */
 
 #knapperpåsiden{
   text-align: center;
+  position: relative;
+  z-index: 10;
 }
 
 #textboxImportExportTotal {
@@ -304,7 +310,7 @@ margin-bottom: 100px;
   border: 1px solid black;
   padding: 10px 15px;
   margin-top: 35px;
-  margin-bottom: 25px;
+  margin-bottom: 50px;
   margin: 5px;
   font-size: 15px;
 }
@@ -316,7 +322,7 @@ margin-bottom: 100px;
   border: 1px solid black;
   padding: 10px 15px;
   margin-top: 35px;
-  margin-bottom: 25px;
+  margin-bottom: 50px;
   margin: 5px;
   font-size: 15px;
 }
@@ -328,7 +334,7 @@ margin-bottom: 100px;
   border: 1px solid black;
   padding: 10px 15px;
   margin-top: 35px;
-  margin-bottom: 25px;
+  margin-bottom: 50px;
   margin: 5px;
   font-size: 15px;
 }
