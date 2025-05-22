@@ -13,16 +13,24 @@ body {
 /*Map styling*/
 
 #Billede {
-text-align: center;
-transform: scale(1.4);
-  transform-origin: center;
-  padding-top: 60px;
-  padding-bottom: 50px;
+  text-align: center;
+  width: 85vw;
+  max-width: 100%;
+  height: 80vh;
+  max-height: 100vh;
+  display: block;
+  margin: 0 auto;
   position: relative;
   z-index: 1;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-
+#Billede img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 
 #Map {
   width: 85vw;                /* Fylder hele bredden af browseren */

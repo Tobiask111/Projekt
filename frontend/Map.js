@@ -240,13 +240,16 @@ function mouseOver(event, d) {
         .attr("fill", "#7aa6c2")
         .attr("stroke", "#fff");
     
+    // Find Danish name for the country
+    const danishName = Object.entries(countryNames).find(([danish, english]) => english === d.properties.name)?.[0] || d.properties.name;
+    
     // Show tooltip with trade data
     const value = currentState.tradeType === 'export' ? d.properties.export : d.properties.import;
     const typeText = currentState.tradeType === 'export' ? 'Eksport' : 'Import';
     const categoryText = categoryDisplayNames[currentState.category];
     
     tooltip.style("opacity", 1)
-        .html(`<strong>${d.properties.originalLand}</strong><br/>
+        .html(`<strong>${danishName}</strong><br/>
                ${typeText} af ${categoryText}: ${value.toLocaleString()}.000 kr.<br/>
                År: ${currentState.year}`);
 }
