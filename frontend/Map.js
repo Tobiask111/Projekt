@@ -1,5 +1,6 @@
 import { countryNames } from './Name_Mapping.js';
 
+
 // Get viewport dimensions for responsive sizing
 const width = window.innerWidth;
 const height = window.innerHeight;
@@ -16,7 +17,7 @@ const mapGroup = svg.append("g");
 // Configure zoom behavior with min/max scale and drag limits
 const zoom = d3.zoom()
     .scaleExtent([1, 8]) // Allow zooming between 1x and 8x
-    .translateExtent([[0, 0], [width, height]]) // Limit panning to viewport
+    .translateExtent([[0, 0], [width, height]]) // Limit panning
     .on("zoom", (event) => {
         mapGroup.attr("transform", event.transform);
     });
@@ -35,27 +36,18 @@ const path = d3.geoPath().projection(projection);
 // Store current visualization state
 let currentState = {
     tradeType: 'export', // Default trade type
-    category: 'kaffe', // Default category
+    category: 'medicin', // Default category
     year: '2021'  // Default year
 };
 
 
 // Map categories to their API endpoints
-const categoryEndpoints = {
-    kaffe: '/api/onKaffe',
-    maskiner: '/api/onMaskiner',
-    levendeDyr: '/api/onLevendeDyr',
-    medicin: '/api/onMedicin',
-    tobak: '/api/onTobak'
-};
-
-// Add readable category names for display
-const categoryDisplayNames = {
-    kaffe: 'Kaffe',
-    maskiner: 'Maskiner',
-    levendeDyr: 'Levende dyr',
-    medicin: 'Medicin',
-    tobak: 'Tobak'
+const categories = {
+    kaffe: { endpoint: '/api/onKaffe', displayName: 'Kaffe' },
+    maskiner: { endpoint: '/api/onMaskiner', displayName: 'Maskiner' },
+    levendeDyr: { endpoint: '/api/onLevendeDyr', displayName: 'Levende dyr' },
+    medicin: { endpoint: '/api/onMedicin', displayName: 'Medicin' },
+    tobak: { endpoint: '/api/onTobak', displayName: 'Tobak' }
 };
 
 // Global variables for storing map data
@@ -66,23 +58,15 @@ let rawCategoryData;   // Raw trade data for current category
 // Fetch and process trade data for selected category
 async function fetchCategoryData(category) {
     try {
-        const response = await fetch(categoryEndpoints[category]);
+        const response = await fetch(categories[category].endpoint);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
 
         // Determine field names based on category type
-        let exportField, importField;
-        switch(category) {
-            case 'levendeDyr':
-                exportField = 'eksport_levende_dyr';
-                importField = 'import_levende_dyr';
-                break;
-            default:
-                exportField = `eksport_${category}`;
-                importField = `import_${category}`;
-        }
+        const exportField = category === 'levendeDyr' ? 'eksport_levende_dyr' : `eksport_${category}`;
+        const importField = category === 'levendeDyr' ? 'import_levende_dyr' : `import_${category}`;
 
         // Transform data into standardized format
         return data.map(d => ({
@@ -204,12 +188,9 @@ async function updateMapWithYear() {
 
 // Update map visualization
 function updateMap() {
-    // Draw country boundaries
     mapGroup.selectAll("path")
         .data(geoDataWithValues.features.filter(f => 
-            f.properties.name !== "Bermuda" && 
-            f.properties.name !== "Antarctica" &&
-            f.properties.name !== "Seven seas (open ocean)"
+            !["Bermuda", "Antarctica", "Seven seas (open ocean)"].includes(f.properties.name)
         ))
         .join("path")
         .attr("d", path)
@@ -228,29 +209,19 @@ const tooltip = d3.select(".tooltip");
 
 // Handle mouse hover over countries
 function mouseOver(event, d) {
-    // Skip non-country areas
-    if (d.properties.name === "Bermuda" || 
-        d.properties.name === "Antarctica" || 
-        d.properties.name === "Seven seas (open ocean)") {
-        return;
-    }
+    if (["Bermuda", "Antarctica", "Seven seas (open ocean)"].includes(d.properties.name)) return;
 
-    // Highlight country
     d3.select(event.currentTarget)
         .attr("fill", "#7aa6c2")
         .attr("stroke", "#fff");
     
-    // Find Danish name for the country
     const danishName = Object.entries(countryNames).find(([danish, english]) => english === d.properties.name)?.[0] || d.properties.name;
-    
-    // Show tooltip with trade data
     const value = currentState.tradeType === 'export' ? d.properties.export : d.properties.import;
     const typeText = currentState.tradeType === 'export' ? 'Eksport' : 'Import';
-    const categoryText = categoryDisplayNames[currentState.category];
     
     tooltip.style("opacity", 1)
         .html(`<strong>${danishName}</strong><br/>
-               ${typeText} af ${categoryText}: ${value.toLocaleString()}.000 kr.<br/>
+               ${typeText} af ${categories[currentState.category].displayName}: ${value.toLocaleString()}.000 kr.<br/>
                År: ${currentState.year}`);
 }
 
@@ -262,7 +233,7 @@ function mouseMove(event) {
 }
 
 // Reset country appearance when mouse leaves
-function mouseLeave(event, d) {
+function mouseLeave(event) {
     d3.select(event.currentTarget)
         .attr("fill", "#1e6d8c")
         .attr("stroke", "#fff")
