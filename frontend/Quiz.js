@@ -145,7 +145,7 @@ function showScore() {
         <p><strong>Du svarede rigtigt på ${score} ud af ${questions.length}!</strong></p>
         <p style="margin-top: 1em;">Følg disse links for at blive klogere på emnet:</p>
         <p>
-            <a href="https://www.dst.dk/en/Statistik/emner/oekonomi/betalingsbalance-og-udenrigshandel/import-og-eksport-af-varer-og-tjenester" target="_blank">Import og eksport af varer og tjenester</a><br>
+            <a href="https://www.dst.dk/da/Statistik/emner/oekonomi/betalingsbalance-og-udenrigshandel/import-og-eksport-af-varer-og-tjenester" target="_blank">Import og eksport af varer og tjenester</a><br>
             <a href="https://www.dst.dk/da/Statistik/emner/oekonomi/betalingsbalance-og-udenrigshandel/detaljeret-import-og-eksport" target="_blank">Detaljeret import og eksport</a>
         </p>
     `;
