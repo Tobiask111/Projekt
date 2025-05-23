@@ -91,7 +91,7 @@ to Poppins and the box-sizing secures that all the information stays inside the 
     box-sizing: border-box;
 }
 /* This styles a centered white box with rounded corners and internal spacing. */
-.app{
+#app{
     background: #fff;
     width: 90%;
     max-width: 600px;
@@ -102,30 +102,30 @@ to Poppins and the box-sizing secures that all the information stays inside the 
 }
 /* Targets the first header element inside the element with class .app. It gives it a clean look with a defined 
 bootom border and spacing. */
-.app h1{
+#app h1{
     font-size: 25px;
     color: #001e4d;
     font-weight: 600;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid black;
     padding-bottom: 30px;
 }
 /* Adds vertical padding to the .quiz element. */
-.quiz{
+#quiz{
     padding: 20px 0;
 }
 /* Styles the h2 headings inside the .quiz container */
-.quiz h2{
+#quiz h2{
     font-size: 18px;
     color: #001e4d;
     font-weight: 600;
 }
 /* Makes the button have a white background, dark text, rounded corners and an effect when hovered or interacted with */
-.btn{
+#btn{
     background: #fff;
-    color: #222;
+    color: black2;
     font-weight: 500;
     width: 100%;
-    border: 1px solid #222;
+    border: 1px solid black;
     padding: 10px;
     margin: 10px 0;
     text-align: left;
@@ -135,12 +135,12 @@ bootom border and spacing. */
 }
 /* When the button it changes the button to black and the text to white. And it makes sure that disabled 
 buttons dont respond to the hover effect */
-.btn:hover:not([disabled]){
-    background: #222;
+#btn:hover:not([disabled]){
+    background: black;
     color: #fff;
 }
 /* Disables the cursor, so you cant have multiple tries after an answer */
-.btn:disabled{
+#btn:disabled{
     cursor: no-drop;
 }
 /* Makes the next button */
@@ -158,14 +158,14 @@ buttons dont respond to the hover effect */
     display: none;
 }
 /* When the answer is correct, it makes the button green. When wrong the button goes red */
-.correct{
+#correct{
     background: #9aeabc;
 }
-.incorrect{
+#incorrect{
     background: #ff9393;
 }
 /* Makes the explanation box in the bottom of the page after an answer has been given. */
-.explanation {
+#explanation {
     margin-top: 20px;
     padding: 15px 20px;
     background-color: #e6f7ff;
