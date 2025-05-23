@@ -22,7 +22,7 @@ const zoom = d3.zoom()
         mapGroup.attr("transform", event.transform);
     });
 
-// Apply zoom behavior to SVG
+// Apply zoom to SVG
 svg.call(zoom);
 
 // Set up Mercator projection for world map

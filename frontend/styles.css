@@ -8,7 +8,7 @@ body {
   width: 100%;
 }
 
-/*Map styling*/
+
 
 #Billede {
 text-align: center;
@@ -23,10 +23,10 @@ transform: scale(1.4);
 
 
 #Map {
-  width: 85vw;                /* Fylder hele bredden af browseren */
-  max-width: 100%;             /* Undgår at overskride bredden */
-  height: 80vh;                /* Fylder 80% af højden på skærmen */
-  max-height: 100vh;           /* Undgår at blive højere end vinduet */
+  width: 85vw;               
+  max-width: 100%;             
+  height: 80vh;                
+  max-height: 100vh;           
   display: block;
   margin: 0 auto;
   background-color: lightsteelblue;
